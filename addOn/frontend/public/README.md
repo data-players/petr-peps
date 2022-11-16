@@ -1,0 +1,1 @@
+## Replace favicon.ico and logo512 + logo 192 by your own. Don't forget to rename "favicon.ico" "loo512.png" and "logo192.png".
