@@ -1,43 +1,25 @@
-local= docker-compose -f docker-compose-local.yaml
-prod= docker-compose -f docker-compose-prod.yaml
-path-cron-prod= ./compact-cron-prod.sh
-path-cron-local= ./compact-cron-local.sh
+local= docker-compose
+path-cron= ./compact-cron-local.sh
+path= ./compact.sh
 
-build-prod:
-	$(prod) build --no-cache
-
-build-local:
+build:
 	$(local) build --no-cache
 
-start-prod: 
-	$(prod) up -d --force-recreate
 
-stop-prod: 
-	$(prod) down
-
-logs-prod:
-	$(prod) logs -f
-
-logs-local:
-	$(local) logs -f
-
-start-local: 
+start: 
 	$(local) up -d --force-recreate
 
-stop-local: 
+stop: 
 	$(local) down
 
-compact-prod: 
-	$(prod) down && $(prod) up fuseki_compact && $(prod) up -d
+logs:
+	$(local) logs -f
 
-compact-local:
+compact: 
 	$(local) down && $(local) up fuseki_compact && $(local) up -d
 
-set-compact-cron-prod: 
-	(crontab -l 2>/dev/null; echo "0 4 * * * $(path-cron-prod) >> /tmp/cronlog.txt") | crontab -
-
-set-compact-cron-local: 
-	(crontab -l 2>/dev/null; echo "0 4 * * * $(path-cron-local) >> /tmp/cronlog.txt") | crontab -
+set-compact-cron: 
+	(crontab -l 2>/dev/null; echo "0 4 * * * $(path-cron) >> /tmp/cronlog.txt") | crontab -
 
 prune-data:
 	sudo rm -rf ./data
