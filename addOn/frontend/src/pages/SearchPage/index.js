@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { 
-  SimpleList,
-  useDataProvider
+  useDataProvider,
 } from 'react-admin';
-import { ListContext } from 'ra-core';
-import { Avatar, Box, Button, Chip, Container, makeStyles } from '@material-ui/core';
+import { Avatar, Box, Button, Chip, Container, makeStyles, ListItem } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import OrganizationIcon from '@material-ui/icons/Home';
@@ -13,7 +11,6 @@ import customSearchConfig from './config';
 import ResourceIcon from '../../ResourceIcon';
 
 import DataFactory from '@rdfjs/data-model';
-
 
 const useStyles = makeStyles(theme => ({
   mainContainer: {
@@ -144,7 +141,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SearchPage = ({ theme }) => {
-  console.log("TOto_________________________________toto")
   const classes = useStyles();
   
   const dataProvider = useDataProvider();
@@ -335,33 +331,18 @@ const SearchPage = ({ theme }) => {
           "sparqlWhere": sparqlWhere
         }
     });
-      
-    const uniqueResources = [...new Set(results.data.map(item => item[selectedResource["result-path"]["name"]]))];
-    const resultsByResource = await Promise.all( uniqueResources.map(async uniqueResource => {
-      const resourceData = await dataProvider.getOne(selectedResource.name, {id: uniqueResource});
-      return ([ 
-        uniqueResource, {
-          id : uniqueResource,
-          resourceData : resourceData.data,
-          list: results.data
-            .filter(item => item[selectedResource["result-path"]["name"]] === uniqueResource)
-            .map(item => item["pair:label"])
-        }
-      ])
-    }))
-  
+    
     setResults({
       ...results,
-      dataByResource: Object.fromEntries(resultsByResource)
     });
   }
-  
+
   useEffect( () => { 
     if (selectedValues.length > 0) {
       getResults();
     }
   }, [selectedValues])
-  
+
   const resultsRef = useRef(null);
   const handleResultsStepClick = () => {
     setSearchStep(getSearchStep('results'));
@@ -482,7 +463,7 @@ const SearchPage = ({ theme }) => {
                 }
               </Box>
             }
-            { 
+            {
               searchFields.filter(field => selectedField === field).map((field, index) => (
                 <Box key={index} className={classes.criteriaContainer}>
                   <Box className={ (fieldValues.length > 6) ? classes.manyCriterias : null }>
@@ -538,34 +519,23 @@ const SearchPage = ({ theme }) => {
                 { results.total > 0 &&
                   <h2>Résultats ({results.total}) :</h2>
                 }
-                { results.data && 
+                { results.total > 0 && 
                   <Box className={classes.resultsContainer}>
-                    <ListContext.Provider
-                      value={{
-                          loaded: true,
-                          loading: false,
-                          ids: Object.keys(results.dataByResource),
-                          data: results.dataByResource,
-                          total: Object.keys(results.dataByResource).length,
-                          resource: selectedResource["result-path"]["type"],
-                          basePath: '/' + selectedResource["result-path"]["type"],
-                      }}
-                    >
-                      <SimpleList
-                        primaryText={record => record.resourceData["pair:label"]}
-                        secondaryText={record => { return (
-                          <ul>
-                            {record.list.map((item, index) => <li key={index} className={classes.resultItem}>{item}</li>)}
-                          </ul>
-                        )}}
-                        leftAvatar={record => (
-                          <Avatar src={record.resourceData['petr:logo']} width="100%">
-                            <OrganizationIcon />
-                          </Avatar>
-                        )}
-                        linkType="show"
-                      />
-                    </ListContext.Provider>
+                    {
+                      results.data.map((organization, index) => (
+                        organization &&
+                        <Box pt={1} pl={2} key={index}>
+                          <ListItem>
+                            <Chip 
+                              label={organization["pair:label"]}
+                            />
+                            <Avatar src={organization['image']} width="100%">
+                              <OrganizationIcon />
+                            </Avatar>
+                          </ListItem>
+                        </Box>
+                      ))
+                    }
                   </Box>
                 }
               </Box>
