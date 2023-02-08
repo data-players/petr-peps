@@ -82,9 +82,9 @@ const AppBar = props => {
               <img className={classes.logo} src={process.env.PUBLIC_URL + '/logo192.png'} alt="logo" />
             </Zoom>
           </div>
-          <Typography className={classes.title} variant="h6" noWrap>
+          {/* <Typography className={classes.title} variant="h6" noWrap>
             {props.title}
-          </Typography>
+          </Typography> */}
         </div>
       </Link>
       <Button variant="contained" color="secondary" href="/Search" className={classes.button}>Search</Button>
