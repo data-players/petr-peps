@@ -31,10 +31,10 @@ module.exports = {
     },
     webacl: {
       superAdmins: [
-      'http://localhost:3000/persons/simon.louvet.zen',
-      'http://localhost:3000/persons/bastien.siguier',
-      'https://data.petr-msb.data-players.com/persons/simon.louvet.zen',
-      'https://data.petr-msb.data-players.com/persons/bastien.siguier']
+      'http://localhost:3000/users/simon.louvet.zen',
+      'http://localhost:3000/users/bastien.siguier',
+      'https://data.petr-peps.data-players.com/users/simon.louvet.zen',
+      'https://data.petr-peps.data-players.com/users/bastien.siguier']
     }
   }
 };
