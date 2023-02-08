@@ -106,7 +106,7 @@ const SideThemeOrga = () => {
   if (Array.isArray(hasTopicStrings)) {
     hasTopicStrings.forEach(topicString => { 
       const topicStringArray = Object.entries(data).filter(([key, value]) => key === topicString);
-      if (Array.isArray(topicStringArray)) {
+      if (Array.isArray(topicStringArray) && Array.isArray(topicStringArray[0])) {
         hasTopic.push(topicStringArray[0][1]);
       }
     });
