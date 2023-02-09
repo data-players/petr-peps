@@ -163,7 +163,7 @@ const OrganizationShow = React.forwardRef((props, ref) => {
               <TextField source='pair:openingHour'className={classes.contactContent}/>
               <div className={classes.contactTitle}>SITE INTERNET</div>
               <UrlField source="pair:homePage" className={classes.contactContent}/>
-              <div className={classes.contactTitle}>ADDRESSE</div>
+              <div className={classes.contactTitle}>ADRESSE</div>
               <TextField source='pair:hasLocation.pair:label'className={classes.contactContent}/>
             </Box>
             <Box>
