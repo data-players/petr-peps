@@ -1,7 +1,8 @@
 import React from 'react';
 import { AppBar as RaAppBar, Link } from 'react-admin';
-import { Zoom, makeStyles, Button } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { Zoom, Hidden, makeStyles, Typography } from '@material-ui/core';
+import { UserMenu } from "@semapps/auth-provider";
+import SearchForm from './SearchForm';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -13,7 +14,10 @@ const useStyles = makeStyles(theme => ({
     height: 56,
     [theme.breakpoints.up('sm')]: {
       paddingLeft: '24px'
-    }
+    },
+  },
+  toolbarIframe:{
+    display:"none",
   },
   spacer: {
     flex: 1
@@ -54,21 +58,22 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     display: 'block',
-    color: theme.palette.common.white,
+    color: theme.palette.primary.contrastText,
     [theme.breakpoints.up('sm')]: {
       display: 'none'
     },
     [theme.breakpoints.up('md')]: {
       display: 'block'
     }
-  },
-  button: {
-    marginLeft : 'auto',
   }
 }));
 
 const AppBar = props => {
   const classes = useStyles();
+  const isIframe = window !== window.top;
+  if (isIframe) { classes.toolbar = classes.toolbarIframe }
+  console.log(classes)
+
   return (
     <RaAppBar
       {...props}
@@ -82,14 +87,24 @@ const AppBar = props => {
               <img className={classes.logo} src={process.env.PUBLIC_URL + '/logo192.png'} alt="logo" />
             </Zoom>
           </div>
-          {/* <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap>
             {props.title}
-          </Typography> */}
+          </Typography>
         </div>
       </Link>
-      <Button variant="contained" color="secondary" href="/Search" className={classes.button}>Search</Button>
+      <Hidden only="xs">
+        <div className={classes.searchFormContainer}>
+          <div className={classes.searchFormWrapper}>
+            <SearchForm />
+          </div>
+        </div>
+      </Hidden>
     </RaAppBar>
   );
+};
+
+AppBar.defaultProps = {
+  userMenu: <UserMenu />
 };
 
 export default AppBar;
