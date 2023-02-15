@@ -72,7 +72,6 @@ const AppBar = props => {
   const classes = useStyles();
   const isIframe = window !== window.top;
   if (isIframe) { classes.toolbar = classes.toolbarIframe }
-  console.log(classes)
 
   return (
     <RaAppBar

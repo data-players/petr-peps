@@ -1,10 +1,12 @@
 import React from 'react';
-import { FormTab, TabbedForm, TextInput } from 'react-admin';
+import { FormTab, TabbedForm, TextInput, SelectInput } from 'react-admin';
 import { MarkdownInput } from '@semapps/markdown-components';
 import { AgentsInput, ThemesInput } from '../../../common/input';
 import Edit from "../../../layout/edit/Edit";
 import ThemeTitle from './ThemeTitle';
 import { ColorInput } from 'react-admin-color-input';
+import { ReferenceInput } from '@semapps/input-components';
+
 
 export const ThemeEdit = props => (
   <Edit title={<ThemeTitle />} {...props}>
@@ -18,7 +20,9 @@ export const ThemeEdit = props => (
       </FormTab>
       <FormTab label="Relations">
         <AgentsInput source="pair:topicOf" />
-        <ThemesInput label="Thème Parent" source="pair:broader" />
+        <ReferenceInput label="Thème Parent" reference="Theme" source="peps:broader" >
+          <SelectInput optionText="pair:label" />
+        </ReferenceInput>
       </FormTab>
     </TabbedForm>
   </Edit>

@@ -20,17 +20,23 @@ export const OrganizationEdit = props => (
     <TabbedForm redirect="show">
       <FormTab label="Données">
         <TextInput source="pair:label" fullWidth />
-        <TextInput source="pair:comment" fullWidth />
+        <TextInput label="Type de professionnels / services" source="peps:type" fullWidth  />
+        {/* <TextInput source="pair:comment" fullWidth /> */}
         <MarkdownInput multiline source="pair:description" fullWidth />
-        <TextInput label="Horraire d'ouverture" source="pair:openingHour" />
-        <ReferenceInput reference="Status" source="pair:hasStatus" filter={{ a: 'pair:AgentStatus' }}>
+        <TextInput label="Horraire d'ouverture" source="peps:openHour" fullWidth />
+        {/* <ReferenceInput reference="Status" source="pair:hasStatus" filter={{ a: 'pair:AgentStatus' }}>
           <SelectInput optionText="pair:label" fullWidth/>
-        </ReferenceInput>
-        <ReferenceInput reference="Type" source="pair:hasType" filter={{ a: 'pair:OrganizationType' }}>
+        </ReferenceInput> */}
+        {/* <ReferenceInput reference="Type" source="pair:hasType" filter={{ a: 'pair:OrganizationType' }}>
           <SelectInput optionText="pair:label" />
-        </ReferenceInput>
-        <TextInput source="pair:homePage" fullWidth />
-        <LocationInput source="pair:hasLocation" fullWidth />
+        </ReferenceInput> */}
+        <TextInput label="Capacité d'accueil" source="peps:accommodationCapacity" fullWidth />
+        <TextInput label="Public concerné et critère(s) d'admission" source="peps:concernedPublic" fullWidth />
+        <TextInput label="Déplacement à domicile" source="peps:homeTrip" fullWidth />
+        <TextInput label="Compétences" source="peps:skills" fullWidth />
+        {/* <TextInput source="pair:homePage" fullWidth  /> */}
+        <LocationInput source="pair:hasLocation" fullWidth  />
+        <TextInput label="Source de données" source="peps:dataSource" fullWidth />
         <ImageInput source="image" accept="image/*">
           <ImageField source="src" />
         </ImageInput>
@@ -47,11 +53,11 @@ export const OrganizationEdit = props => (
           </ReferenceInput>
         </ReificationArrayInput>
       </FormTab>
-      <FormTab label="Relations">
-        <OrganizationsInput source="pair:partnerOf" />
-        <EventsInput source="pair:involvedIn" />
+      <FormTab label="Thématiques">
+        {/* <OrganizationsInput source="pair:partnerOf" /> */}
+        {/* <EventsInput source="pair:involvedIn" /> */}
         <ThemesInput source="pair:hasTopic" />
-        <DocumentsInput source="pair:documentedBy" />
+        {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>
   </Edit>

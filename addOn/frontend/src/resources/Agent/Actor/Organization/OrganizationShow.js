@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { TextField, UrlField, useGetList, useRecordContext } from 'react-admin';
+import { TextField, UrlField, useGetList, useRecordContext, FunctionField } from 'react-admin';
 import { Typography, Box, Grid } from '@material-ui/core';
 import OrganizationTitle from './OrganizationTitle';
 import { MarkdownField } from '@semapps/markdown-components';
@@ -8,6 +8,8 @@ import Show from "../../../../layout/show/Show";
 import { makeStyles } from '@material-ui/core/styles';
 import * as Muicon from '@mui/icons-material';
 import { useReactToPrint } from 'react-to-print';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 const useStyles = makeStyles(theme => ({
   whiteBox: {
@@ -15,16 +17,14 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '20px',
     paddingBlock: "20px",
     color: theme.palette.primary.main,
-    marginBottom: '30px',
+    marginBottom: '40px',
     fontWeight: 'bold',
     fontSize: '20px',
     margin: "40px",
     overflow: "hidden"
   },
-  contentBox: {
-    color: theme.palette.primary.main,
-    marginBottom: '30px',
-    fontSize: '20px',
+  contentRightBox: {
+    paddingTop: "40px"
   },
   boxTitle: {
     fontWeight: 'bold',
@@ -39,16 +39,16 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     fontWeight: "bold",
     fontSize: "25px",
-    marginTop: "40px",
   },
   contactTitle:{
     color: theme.palette.primary.main,
     fontWeight: "bold",
     fontSize: "20px",
-    marginTop: "40px",
   },
   contactContent: {
-    fontSize: "20px", 
+    fontSize: "20px",
+    color: theme.palette.primary.main,
+    paddingBottom: "20px",
   },
   printButton: {
     borderRadius: "10px",
@@ -67,7 +67,12 @@ const useStyles = makeStyles(theme => ({
     color: "#90be48",
     fontSize: "15px",
   },
-}));
+  markdownText: {
+    marginBottom: "40px", 
+    color: theme.palette.primary.main, 
+    fontSize: "20px"
+  }
+})); 
 
 const Icon = ({ name, ...rest }) => {
   const IconComponent = Muicon[name];
@@ -78,7 +83,7 @@ const Theme = ({childThemes, parent}) => {
   let selectedTheme = []
   if (!childThemes) return null;
   childThemes.forEach(theme => {
-    if (theme["pair:broader"] && theme["pair:broader"].includes(parent)) {
+    if (theme["peps:broader"] && theme["peps:broader"] === parent) {
       selectedTheme.push(theme);
     }
   });
@@ -102,6 +107,13 @@ const SideThemeOrga = () => {
   if (!record) return null;
   const hasTopicStrings = record["pair:hasTopic"];
 
+  let routeTree = [];
+  for (const item in data) {
+    if (data[item]["peps:broader"] === undefined ) {
+      routeTree.push(data[item]);
+    }
+  }
+
   let hasTopic = [];
   if (Array.isArray(hasTopicStrings)) {
     hasTopicStrings.forEach(topicString => { 
@@ -114,33 +126,56 @@ const SideThemeOrga = () => {
   
   return (
     <Grid item xs={12} sm={12} md={6} >
-      <Box className={classes.whiteBox}>
-        <Typography className={classes.boxTitle}>BESOIN</Typography>
-        <Theme childThemes={hasTopic} parent="besoin"/>
-      </Box>
-      <Box className={classes.whiteBox}>
-        <Typography className={classes.boxTitle}>ACCESSIBILITE</Typography>
-        <Theme childThemes={hasTopic} parent="accessibilite"/>
-      </Box>
-      <Box className={classes.whiteBox}>
-        <Typography className={classes.boxTitle}>PROFIL PRIORITAIRE</Typography>
-        <Theme childThemes={hasTopic} parent="profil-prioritaire"/>
-      </Box>
-      <Box className={classes.whiteBox}>
-        <Typography className={classes.boxTitle}>SECTEUR GEOGRAPHIQUE</Typography>
-        <Theme childThemes={hasTopic} parent="territoire"/>
-      </Box>
-      <Box className={classes.whiteBox}>
-        <Typography className={classes.boxTitle}>ETAPE DE VIE</Typography>
-        <Theme childThemes={hasTopic} parent="etape-de-la-vie"/>
-      </Box>
+      {
+        routeTree.map( route => 
+          <Box className={classes.whiteBox}>
+            <Typography className={classes.boxTitle}>{route["pair:label"] }</Typography>
+            <Theme childThemes={hasTopic} parent={route.id}/>
+          </Box>
+        )
+      }
     </Grid>
+  )
+}
+
+const TextFieldWithTitle = ({title, source, check=false}) => {
+  const classes = useStyles();
+  const record = useRecordContext();
+  if (!record) return null;
+  if(!record[source] && !check) return null;
+
+  return (
+    <>
+      <Box style={{marginBottom: "20px"}}>
+        <div className={classes.rightTitle}>{title}</div>
+        <TextField source={source} className={classes.contactContent}/>
+      </Box>
+    </>
+  )
+}
+
+const MarkdownFieldWithTitle = ({title, source}) => {
+  const classes = useStyles();
+  const record = useRecordContext();
+  if (!record) return null;
+  if(!record[source]) return null;
+
+  return (
+    <>
+      <Box className={classes.markdownText}>
+        <div className={classes.rightTitle}>{title}</div>
+        <MainList >
+          <MarkdownField addLabel={false} source={source} className={classes.contactContent} />
+        </MainList>      
+      </Box>
+    </>
   )
 }
 
 const OrganizationShow = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const componentRef = useRef();
+  const matches = useMediaQuery('print');
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current, 
@@ -152,22 +187,19 @@ const OrganizationShow = React.forwardRef((props, ref) => {
         <Grid container spacing={5} >
           <SideThemeOrga />
           <Grid item xs={12} sm={12} md={6}>
-            <div className={classes.rightTitle}>STRUCTURE MERE</div>
-            <TextField className={classes.contentBox} source="pair:comment" />
-            <Box className={classes.contentBox}>
-              <div className={classes.rightTitle}>INFORMATIONS</div>
-              <MainList >
-                <MarkdownField addLabel={false} source="pair:description" />
-              </MainList>
-              <div className={classes.contactTitle}>OUVERTURE</div>
-              <TextField source='pair:openingHour'className={classes.contactContent}/>
-              <div className={classes.contactTitle}>SITE INTERNET</div>
-              <UrlField source="pair:homePage" className={classes.contactContent}/>
-              <div className={classes.contactTitle}>ADRESSE</div>
-              <TextField source='pair:hasLocation.pair:label'className={classes.contactContent}/>
-            </Box>
-            <Box>
-              <button onClick={handlePrint} className={classes.printButton}>IMPRIMER</button>
+            <Box className={classes.contentRightBox}>
+              <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
+              <TextFieldWithTitle title="COORDONNES" source='pair:hasLocation.pair:label' check="true"/>
+              <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />   
+              <TextFieldWithTitle source='peps:skills' title="COMPETENCE" />
+              <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />
+              <TextFieldWithTitle source='peps:accommodationCapacity' title="CAPACITE D'ACCUEIL" />
+              <TextFieldWithTitle source='peps:homeTrip' title="DEPLACEMENT A DOMICILE" />
+              <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNE" />
+              <TextFieldWithTitle source='peps:dataSource' title="SOURCE DE DONNEES" />
+              <Box >
+                {matches ? null : <button onClick={handlePrint} className={classes.printButton}>IMPRIMER</button>}
+              </Box>
             </Box>
           </Grid>
         </Grid>
