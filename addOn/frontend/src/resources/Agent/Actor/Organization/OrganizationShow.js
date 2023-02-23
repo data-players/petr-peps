@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { TextField, UrlField, useGetList, useRecordContext, FunctionField } from 'react-admin';
+import { TextField, useGetList, useRecordContext } from 'react-admin';
 import { Typography, Box, Grid } from '@material-ui/core';
 import OrganizationTitle from './OrganizationTitle';
 import { MarkdownField } from '@semapps/markdown-components';
@@ -189,7 +189,7 @@ const OrganizationShow = React.forwardRef((props, ref) => {
           <Grid item xs={12} sm={12} md={6}>
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
-              <TextFieldWithTitle title="COORDONNES" source='pair:hasLocation.pair:label' check="true"/>
+              <TextFieldWithTitle title="COORDONNEES" source='pair:hasLocation.pair:label' check="true"/>
               <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />   
               <TextFieldWithTitle source='peps:skills' title="COMPETENCE" />
               <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />

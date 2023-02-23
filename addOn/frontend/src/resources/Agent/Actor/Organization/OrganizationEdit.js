@@ -11,7 +11,7 @@ import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
 import { ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { OrganizationsInput, EventsInput, ThemesInput, DocumentsInput, LocationInput } from '../../../../common/input';
+import { ThemesInput, LocationInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 
@@ -23,7 +23,7 @@ export const OrganizationEdit = props => (
         <TextInput label="Type de professionnels / services" source="peps:type" fullWidth  />
         {/* <TextInput source="pair:comment" fullWidth /> */}
         <MarkdownInput multiline source="pair:description" fullWidth />
-        <TextInput label="Horraire d'ouverture" source="peps:openHour" fullWidth />
+        <TextInput label="Horaire d'ouverture" source="peps:openHour" fullWidth />
         {/* <ReferenceInput reference="Status" source="pair:hasStatus" filter={{ a: 'pair:AgentStatus' }}>
           <SelectInput optionText="pair:label" fullWidth/>
         </ReferenceInput> */}

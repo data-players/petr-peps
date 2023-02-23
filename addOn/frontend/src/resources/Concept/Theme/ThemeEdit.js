@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormTab, TabbedForm, TextInput, SelectInput } from 'react-admin';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { AgentsInput, ThemesInput } from '../../../common/input';
+import { AgentsInput } from '../../../common/input';
 import Edit from "../../../layout/edit/Edit";
 import ThemeTitle from './ThemeTitle';
 import { ColorInput } from 'react-admin-color-input';

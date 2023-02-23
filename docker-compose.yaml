@@ -21,7 +21,7 @@ services:
       - ./data/fuseki:/fuseki
 
   middleware:
-    image: dataplayers/archipelago-middleware:0.7
+    image: dataplayers/archipelago-middleware:0.8
     depends_on:
       - fuseki
     volumes:
@@ -46,7 +46,7 @@ services:
       - '3000:3000'
 
   frontend:
-    image: dataplayers/archipelago-frontend:0.7
+    image: dataplayers/archipelago-frontend:0.8
     environment:
       - 'REACT_APP_MIDDLEWARE_URL=http://localhost:3000/'
       - REACT_APP_MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijoic3Jvc3NldDgxIiwiYSI6ImNrbDd0b2VkMzA1dDMycG9iemU4NnpuemsifQ.HvpZ3tnweVHEUYLb0tDvTg

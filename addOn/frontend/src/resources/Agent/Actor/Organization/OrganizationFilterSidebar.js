@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Card, CardContent, makeStyles, TextField } from '@material-ui/core';
-import { ReferenceFilter } from '@semapps/list-components';
+// import { ReferenceFilter } from '@semapps/list-components';
 import ReferenceFilterTree from './ReferenceFilterTree'
 import { Form, Field } from 'react-final-form';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -66,14 +66,6 @@ const ProjectFilterSidebar = () => {
       )}
     />
       <CardContent className={classes.cardContent}>
-        <ReferenceFilter
-          reference="Type"
-          source="pair:hasType"
-          inverseSource="pair:typeOf"
-          limit={100}
-          filter={{ a: 'pair:OrganizationType' }}
-          sort={{ field: 'pair:label', order: 'DESC' }}
-        />
         <ReferenceFilterTree
           reference="Theme"
           source="pair:broader"
