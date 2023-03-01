@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     marginBottom: '40px',
     fontWeight: 'bold',
-    fontSize: '20px',
+    fontSize: '18px',
     margin: "40px",
     overflow: "hidden",
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
   boxTitle: {
     fontWeight: 'bold',
-    fontSize: '20px',
+    fontSize: '18px',
     color: theme.palette.primary.main,
     textTransform: "uppercase;"
   },
@@ -37,15 +37,15 @@ const useStyles = makeStyles(theme => ({
   rightTitle: {
     color: theme.palette.primary.main,
     fontWeight: "bold",
-    fontSize: "25px",
+    fontSize: "23px",
   },
   contactTitle:{
     color: theme.palette.primary.main,
     fontWeight: "bold",
-    fontSize: "20px",
+    fontSize: "18px",
   },
   contactContent: {
-    fontSize: "20px",
+    fontSize: "18px",
     color: theme.palette.primary.main,
     paddingBottom: "20px",
   },
@@ -64,15 +64,15 @@ const useStyles = makeStyles(theme => ({
   },
   heal: {
     color: "#90be48",
-    fontSize: "15px",
+    fontSize: "13px",
   },
   markdownText: {
     color: theme.palette.primary.main, 
-    fontSize: "20px"
+    fontSize: "18px"
   },
   printTitle: {
     color: theme.palette.primary.main, 
-    fontSize: "30px",
+    fontSize: "28px",
     fontWeight: "bold",
     paddingTop: "10px",
     paddingLeft: "40px"
@@ -270,7 +270,7 @@ const handlePrint = () => {
             <SideConceptOrga source="peps:hasNeed" concept="Need" title="Besoin" />
             <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} style={{padding: "0px", paddingRight:"2%"}} >
+          <Grid item xs={12} sm={12} md={6} style={{padding: "0px 30px 0px 0px"}} >
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
               <TextFieldWithTitle title="COORDONNEES" source='pair:hasLocation.pair:label' check="true"/>
