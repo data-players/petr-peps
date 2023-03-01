@@ -20,7 +20,7 @@ export default {
     types: ['pair:Organization'],
     list: {
       servers: '@default',
-      forceArray: ['pair:organizationOfMembership', 'pair:hasTopic']
+      forceArray: ['pair:organizationOfMembership', 'pair:hasTopic', 'peps:hasProfile', 'peps:hasLifeStage', 'peps:hasNeed', 'peps:hasAccessibility', 'peps:hasMobility', 'peps:hasSector']
     },
     fieldsMapping: {
       title: 'pair:label'

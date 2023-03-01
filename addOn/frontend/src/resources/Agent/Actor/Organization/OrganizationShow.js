@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextField, useGetList, useRecordContext } from 'react-admin';
 import { Typography, Box, Grid } from '@material-ui/core';
 import OrganizationTitle from './OrganizationTitle';
@@ -8,8 +8,6 @@ import Show from "../../../../layout/show/Show";
 import { makeStyles } from '@material-ui/core/styles';
 import * as Muicon from '@mui/icons-material';
 import { useReactToPrint } from 'react-to-print';
-import useMediaQuery from '@mui/material/useMediaQuery';
-
 
 const useStyles = makeStyles(theme => ({
   whiteBox: {
@@ -21,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     fontSize: '20px',
     margin: "40px",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   contentRightBox: {
     paddingTop: "40px"
@@ -30,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     fontSize: '20px',
     color: theme.palette.primary.main,
+    textTransform: "uppercase;"
   },
   title: {
     backgroundColor: theme.palette.primary.main,
@@ -68,9 +67,18 @@ const useStyles = makeStyles(theme => ({
     fontSize: "15px",
   },
   markdownText: {
-    marginBottom: "40px", 
     color: theme.palette.primary.main, 
     fontSize: "20px"
+  },
+  printTitle: {
+    color: theme.palette.primary.main, 
+    fontSize: "30px",
+    fontWeight: "bold",
+    paddingTop: "10px",
+    paddingLeft: "40px"
+  },
+  sideGrid: {
+    padding: "0px"
   }
 })); 
 
@@ -79,62 +87,101 @@ const Icon = ({ name, ...rest }) => {
   return IconComponent ? <IconComponent {...rest} /> : null;
 };
 
-const Theme = ({childThemes, parent}) => {
-  let selectedTheme = []
-  if (!childThemes) return null;
-  childThemes.forEach(theme => {
-    if (theme["peps:broader"] && theme["peps:broader"] === parent) {
-      selectedTheme.push(theme);
-    }
-  });
-  if (selectedTheme.length === 0)
-    return (<div><span style={{color: "#ABA093"}}>Non Renseigné</span></div>)
-  return (
-    selectedTheme.map(theme => 
+// const Theme = ({childThemes, parent}) => {
+//   let selectedTheme = []
+//   if (!childThemes) return null;
+//   childThemes.forEach(theme => {
+//     if (theme["peps:broader"] && theme["peps:broader"] === parent) {
+//       selectedTheme.push(theme);
+//     }
+//   });
+//   if (selectedTheme.length === 0)
+//     return (<div><span style={{color: "#ABA093"}}>Non Renseigné</span></div>)
+//   return (
+//     selectedTheme.map(theme => 
 
-      <div style={{display: "flex", alignItems: "center"}}>
-        {<Icon name={theme["pair:icon"]} style={{color: theme["pair:color"], fontSize: "35px"}}/>} 
-        <span style={{color: theme["pair:color"], fontSize: "20px", paddingLeft:"5px"}}>{theme["pair:label"]}</span>
+//       <div style={{display: "flex", alignItems: "center"}}>
+//         {<Icon name={theme["pair:icon"]} style={{color: theme["pair:color"], fontSize: "35px"}}/>} 
+//         <span style={{color: theme["pair:color"], fontSize: "20px", paddingLeft:"5px"}}>{theme["pair:label"]}</span>
+//       </div>
+//     )
+//   )
+// }
+
+// const SideThemeOrga = () => {
+//   const classes = useStyles();
+//   const { data } = useGetList("Theme", { page: 1, perPage: Infinity });
+//   const record = useRecordContext();
+//   if (!record) return null;
+//   const hasTopicStrings = record["pair:hasTopic"];
+
+//   let routeTree = [];
+//   for (const item in data) {
+//     if (data[item]["peps:broader"] === undefined ) {
+//       routeTree.push(data[item]);
+//     }
+//   }
+
+//   let hasTopic = [];
+//   if (Array.isArray(hasTopicStrings)) {
+//     hasTopicStrings.forEach(topicString => { 
+//       const topicStringArray = Object.entries(data).filter(([key, value]) => key === topicString);
+//       if (Array.isArray(topicStringArray) && Array.isArray(topicStringArray[0])) {
+//         hasTopic.push(topicStringArray[0][1]);
+//       }
+//     });
+//   }
+  
+//   return (
+//     <Grid item xs={12} sm={12} md={6} >
+//       {
+//         routeTree.map( route => 
+//           <Box className={classes.whiteBox}>
+//             <Typography className={classes.boxTitle}>{route["pair:label"] }</Typography>
+//             <Theme childThemes={hasTopic} parent={route.id}/>
+//           </Box>
+//         )
+//       }
+//     </Grid>
+//   )
+// }
+
+const Concept = ({selectedConcepts}) => {
+  if (selectedConcepts.length === 0)
+    return (<div><span style={{color: "#ABA093", paddingLeft: "5px"}}>Non Renseigné</span></div>)
+  return (
+    selectedConcepts.map(concept => 
+      <div style={{display: "flex", alignItems: "center", paddingLeft:"5px"}}>
+        {<Icon name={concept["pair:icon"]} style={{color: concept["pair:color"], fontSize: "35px"}}/>} 
+        <span style={{color: concept["pair:color"], fontSize: "20px", paddingLeft:"5px"}}>{concept["pair:label"]}</span>
       </div>
     )
   )
 }
 
-const SideThemeOrga = () => {
+const SideConceptOrga = ({source, concept, title}) => {
   const classes = useStyles();
-  const { data } = useGetList("Theme", { page: 1, perPage: Infinity });
+  const { data } = useGetList(concept, { page: 1, perPage: Infinity });
   const record = useRecordContext();
   if (!record) return null;
-  const hasTopicStrings = record["pair:hasTopic"];
 
-  let routeTree = [];
-  for (const item in data) {
-    if (data[item]["peps:broader"] === undefined ) {
-      routeTree.push(data[item]);
+  let selectedConcepts = [];
+  if (record[source] !== undefined && Array.isArray(record[source])) {
+    for (const item in data) {
+      record[source].map(e => {
+        if (item === e) {
+          selectedConcepts.push(data[item]);
+        }
+      })
     }
-  }
-
-  let hasTopic = [];
-  if (Array.isArray(hasTopicStrings)) {
-    hasTopicStrings.forEach(topicString => { 
-      const topicStringArray = Object.entries(data).filter(([key, value]) => key === topicString);
-      if (Array.isArray(topicStringArray) && Array.isArray(topicStringArray[0])) {
-        hasTopic.push(topicStringArray[0][1]);
-      }
-    });
   }
   
   return (
-    <Grid item xs={12} sm={12} md={6} >
-      {
-        routeTree.map( route => 
-          <Box className={classes.whiteBox}>
-            <Typography className={classes.boxTitle}>{route["pair:label"] }</Typography>
-            <Theme childThemes={hasTopic} parent={route.id}/>
-          </Box>
-        )
-      }
-    </Grid>
+    <Box className={classes.whiteBox}>
+      <Typography className={classes.boxTitle}>{title}</Typography>
+      {/* <Theme childThemes={hasTopic} parent={route.id}/> */}
+      <Concept selectedConcepts={selectedConcepts} />
+    </Box>
   )
 }
 
@@ -172,21 +219,58 @@ const MarkdownFieldWithTitle = ({title, source}) => {
   )
 }
 
-const OrganizationShow = React.forwardRef((props, ref) => {
+const PrintTitle = () => {
   const classes = useStyles();
-  const componentRef = useRef();
-  const matches = useMediaQuery('print');
+  const record = useRecordContext();
+  if (!record) return null;
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current, 
-  });
+ return (
+  <div className={classes.printTitle} >{record["pair:label"]}</div>
+ )
+}
+
+const OrganizationShow = React.forwardRef((props) => {
+  const classes = useStyles();
+  const [isPrinting, setIsPrinting] = useState(false);
+  const printRef = useRef(null);
+  const promiseResolveRef = useRef(null);
+
+useEffect(() => {
+  if (isPrinting && promiseResolveRef.current) {
+    promiseResolveRef.current();
+  }
+}, [isPrinting]);
+
+const printing = useReactToPrint({
+  content: () => printRef.current,
+  onBeforeGetContent: () => {
+    return new Promise((resolve) => {
+      promiseResolveRef.current = resolve;
+    });
+  },
+  onAfterPrint: () => {
+    promiseResolveRef.current = null;
+    setIsPrinting(false);
+  }
+});
+
+const handlePrint = () => {
+  setIsPrinting(true);
+  printing()
+}
 
   return (
-    <div ref={componentRef} >
       <Show title={<OrganizationTitle />} {...props}>
-        <Grid container spacing={5} >
-          <SideThemeOrga />
-          <Grid item xs={12} sm={12} md={6}>
+        <Grid container spacing={5} ref={printRef} >
+          {isPrinting ? <Grid item xs={12} sm={12} md={12}><PrintTitle/></Grid> : null}
+          <Grid item xs={12} sm={12} md={6} style={{padding: "0px", paddingLeft: "1%"}} >
+            <SideConceptOrga source="peps:hasSector" concept="Sector" title="Secteur Géographique" />
+            <SideConceptOrga source="peps:hasProfile" concept="Profile" title="Profil Prioritaire" />
+            <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Etape de la vie" />
+            <SideConceptOrga source="peps:hasNeed" concept="Need" title="Besoin" />
+            <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} style={{padding: "0px", paddingRight:"2%"}} >
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
               <TextFieldWithTitle title="COORDONNEES" source='pair:hasLocation.pair:label' check="true"/>
@@ -197,14 +281,11 @@ const OrganizationShow = React.forwardRef((props, ref) => {
               <TextFieldWithTitle source='peps:homeTrip' title="DEPLACEMENT A DOMICILE" />
               <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNE" />
               <TextFieldWithTitle source='peps:dataSource' title="SOURCE DE DONNEES" />
-              <Box >
-                {matches ? null : <button onClick={handlePrint} className={classes.printButton}>IMPRIMER</button>}
-              </Box>
+              {isPrinting ? null : <button onClick={handlePrint} className={classes.printButton} >IMPRIMER</button>}
             </Box>
           </Grid>
         </Grid>
       </Show>
-    </div>
   );
 });
 

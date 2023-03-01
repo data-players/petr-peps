@@ -11,7 +11,7 @@ import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
 import { ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { ThemesInput, LocationInput } from '../../../../common/input';
+import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 
@@ -53,10 +53,17 @@ export const OrganizationEdit = props => (
           </ReferenceInput>
         </ReificationArrayInput>
       </FormTab>
-      <FormTab label="Thématiques">
+      <FormTab label="Concepts">
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
-        <ThemesInput source="pair:hasTopic" />
+        <SectorsInput label="Secteurs Géographique" source="peps:hasSector" />
+        <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" />
+        <NeedsInput label="Besoin" source="peps:hasNeed" />
+        <MobilitiesInput label="Mobilité" source="peps:hasMobility" />
+        <LifestagesInput label="Etape de la vie" source="peps:hasLifeStage" />
+        <ReferenceInput label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility" >
+          <SelectInput optionText="pair:label" />
+        </ReferenceInput>
         {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>

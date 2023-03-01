@@ -5,7 +5,13 @@ export { default as Actor } from './Agent/Actor/Actor';
 
 // Concepts
 export { default as Theme } from './Concept/Theme';
-// export { default as Status } from './Concept/Status';
+export { default as Sector } from './Concept/Sector';
+export { default as Profile } from './Concept/Profile';
+export { default as Mobility } from './Concept/Mobility';
+export { default as Lifestage } from './Concept/Lifestage';
+export { default as Need } from './Concept/Need';
+export { default as Accessibility } from './Concept/Accessibility';
+
 // export { default as Type } from './Concept/Type';
 export { default as Concept } from './Concept/Concept';
 // export { default as MembershipRole } from './Concept/MembershipRole';
