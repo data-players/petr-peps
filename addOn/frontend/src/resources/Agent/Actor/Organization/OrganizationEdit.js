@@ -11,7 +11,7 @@ import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
 import { ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput } from '../../../../common/input';
+import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput, ThemesInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 
@@ -56,6 +56,7 @@ export const OrganizationEdit = props => (
       <FormTab label="Concepts">
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
+        <ThemesInput label="Thématiques" source="peps:hasStatus" />
         <SectorsInput label="Secteurs Géographique" source="peps:hasSector" />
         <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" />
         <NeedsInput label="Besoin" source="peps:hasNeed" />
