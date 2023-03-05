@@ -56,7 +56,7 @@ export const OrganizationEdit = props => (
       <FormTab label="Concepts">
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
-        <ThemesInput label="Thématiques" source="peps:hasStatus" />
+        <ThemesInput label="Thématiques" source="pair:hasTopic" />
         <SectorsInput label="Secteurs Géographique" source="peps:hasSector" />
         <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" />
         <NeedsInput label="Besoin" source="peps:hasNeed" />
