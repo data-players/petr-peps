@@ -268,6 +268,7 @@ const handlePrint = () => {
             <SideConceptOrga source="peps:hasProfile" concept="Profile" title="Profil Prioritaire" />
             <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Etape de la vie" />
             <SideConceptOrga source="peps:hasNeed" concept="Need" title="Besoin" />
+            <SideConceptOrga source="peps:hasMobility" concept="Mobility" title="Mobilité" />
             <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
           </Grid>
           <Grid item xs={12} sm={12} md={6} style={{padding: "0px 30px 0px 0px"}} >
