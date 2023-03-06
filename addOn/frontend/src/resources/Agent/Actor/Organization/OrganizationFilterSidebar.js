@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, Card, CardContent, makeStyles, TextField } from '@material-ui/core';
-// import { ReferenceFilter } from '@semapps/list-components';
-import ReferenceFilterTree from './ReferenceFilterTree'
+import { ReferenceFilter } from '@semapps/list-components';
 import { Form, Field } from 'react-final-form';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useStore } from 'react-redux';
@@ -66,10 +65,39 @@ const ProjectFilterSidebar = () => {
       )}
     />
       <CardContent className={classes.cardContent}>
-        <ReferenceFilterTree
-          reference="Theme"
-          source="pair:broader"
-          label="pair:label"
+        <ReferenceFilter
+          reference="Sector"
+          source="peps:hasSector"
+          limit={100}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
+        <ReferenceFilter
+          reference="Profile"
+          source="peps:hasProfile"
+          limit={100}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
+        <ReferenceFilter
+          reference="Need"
+          source="peps:hasNeed"
+          limit={100}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
+        <ReferenceFilter
+          reference="Mobility"
+          source="peps:hasMobility"
+          limit={100}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
+        <ReferenceFilter
+          reference="Lifestage"
+          source="peps:hasLifeStage"
+          limit={100}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
+        <ReferenceFilter
+          reference="Accessibility"
+          source="peps:hasAccessibility"
           limit={100}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />

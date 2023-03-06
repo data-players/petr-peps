@@ -3,6 +3,7 @@ const urlJoin = require("url-join");
 const { CoreService } = require('@semapps/core');
 const CONFIG = require('../config/config');
 const containers = require('../config/containers');
+const ApiGatewayService = require('moleculer-web');
 
 module.exports = {
   mixins: [CoreService],
@@ -18,6 +19,30 @@ module.exports = {
     containers,
     api: {
       port: CONFIG.PORT,
+      routes: [
+        {
+          path: '/ontology',
+          use: [
+            ApiGatewayService.serveStatic('./public/ontology.ttl', {
+              setHeaders: res => {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Content-Type', 'text/turtle; charset=utf-8');
+              }
+            })
+          ]
+        },
+        {
+           path: '/context.json',
+           use: [
+             ApiGatewayService.serveStatic('./public/context.json', {
+               setHeaders: res => {
+                 res.setHeader('Access-Control-Allow-Origin', '*');
+                 res.setHeader('Content-Type', 'application/json; charset=utf-8');
+               }
+             })
+           ]
+       }
+      ]
     },
     ldp: {
       preferredViewForResource: async (resourceUri, containerPreferredView) => {
