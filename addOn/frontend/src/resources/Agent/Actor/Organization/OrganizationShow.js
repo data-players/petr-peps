@@ -275,7 +275,10 @@ const handlePrint = () => {
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
               <TextFieldWithTitle title="COORDONNEES" source='pair:hasLocation.pair:label' check="true"/>
-              <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />   
+              <Box style={{marginBottom: "20px"}}>
+                <TextField source="pair:comment" className={classes.contactContent} />
+              </Box>
+              <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />
               <TextFieldWithTitle source='peps:skills' title="COMPETENCE" />
               <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />
               <TextFieldWithTitle source='peps:accommodationCapacity' title="CAPACITE D'ACCUEIL" />
