@@ -9,9 +9,9 @@ import {
 } from 'react-admin';
 import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
-import { ReferenceInput } from '@semapps/input-components';
+import { ReferenceArrayInput, ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput, ThemesInput } from '../../../../common/input';
+import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 
@@ -32,7 +32,6 @@ export const OrganizationEdit = props => (
         </ReferenceInput> */}
         <TextInput label="Capacité d'accueil" source="peps:accommodationCapacity" fullWidth />
         <TextInput label="Public concerné et critère(s) d'admission" source="peps:concernedPublic" fullWidth />
-        <TextInput label="Déplacement à domicile" source="peps:homeTrip" fullWidth />
         <TextInput label="Compétences" source="peps:skills" fullWidth />
         {/* <TextInput source="pair:homePage" fullWidth  /> */}
         <LocationInput source="pair:hasLocation" fullWidth  />
@@ -61,9 +60,12 @@ export const OrganizationEdit = props => (
         <NeedsInput label="Besoin" source="peps:hasNeed" />
         <MobilitiesInput label="Mobilité" source="peps:hasMobility" />
         <LifestagesInput label="Etape de la vie" source="peps:hasLifeStage" />
-        <ReferenceInput label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility" >
+        <ReferenceArrayInput label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility" >
           <SelectInput optionText="pair:label" />
-        </ReferenceInput>
+        </ReferenceArrayInput>
+        <ReferenceArrayInput label="Déplacement à Domicile" reference="Hometrip" source="peps:hasHomeTrip" >
+          <SelectInput optionText="pair:label" />
+        </ReferenceArrayInput>
         {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>

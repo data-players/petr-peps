@@ -164,7 +164,7 @@ const SideConceptOrga = ({source, concept, title}) => {
   const { data } = useGetList(concept, { page: 1, perPage: Infinity });
   const record = useRecordContext();
   if (!record) return null;
-
+  
   let selectedConcepts = [];
   if (record[source] !== undefined && Array.isArray(record[source])) {
     for (const item in data) {
@@ -270,6 +270,7 @@ const handlePrint = () => {
             <SideConceptOrga source="peps:hasNeed" concept="Need" title="Besoin" />
             <SideConceptOrga source="peps:hasMobility" concept="Mobility" title="Mobilité" />
             <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
+            <SideConceptOrga source="peps:hasHomeTrip" concept="Hometrip" title="Déplacement à Domicile" />
           </Grid>
           <Grid item xs={12} sm={12} md={6} style={{padding: "0px 30px 0px 0px"}} >
             <Box className={classes.contentRightBox}>
@@ -279,7 +280,6 @@ const handlePrint = () => {
               <TextFieldWithTitle source='peps:skills' title="COMPETENCE" />
               <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />
               <TextFieldWithTitle source='peps:accommodationCapacity' title="CAPACITE D'ACCUEIL" />
-              <TextFieldWithTitle source='peps:homeTrip' title="DEPLACEMENT A DOMICILE" />
               <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNE" />
               <TextFieldWithTitle source='peps:dataSource' title="SOURCE DE DONNEES" />
               {isPrinting ? null : <button onClick={handlePrint} className={classes.printButton} >IMPRIMER</button>}
