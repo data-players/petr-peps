@@ -87,65 +87,6 @@ const Icon = ({ name, ...rest }) => {
   return IconComponent ? <IconComponent {...rest} /> : null;
 };
 
-// const Theme = ({childThemes, parent}) => {
-//   let selectedTheme = []
-//   if (!childThemes) return null;
-//   childThemes.forEach(theme => {
-//     if (theme["peps:broader"] && theme["peps:broader"] === parent) {
-//       selectedTheme.push(theme);
-//     }
-//   });
-//   if (selectedTheme.length === 0)
-//     return (<div><span style={{color: "#ABA093"}}>Non Renseigné</span></div>)
-//   return (
-//     selectedTheme.map(theme => 
-
-//       <div style={{display: "flex", alignItems: "center"}}>
-//         {<Icon name={theme["pair:icon"]} style={{color: theme["pair:color"], fontSize: "35px"}}/>} 
-//         <span style={{color: theme["pair:color"], fontSize: "20px", paddingLeft:"5px"}}>{theme["pair:label"]}</span>
-//       </div>
-//     )
-//   )
-// }
-
-// const SideThemeOrga = () => {
-//   const classes = useStyles();
-//   const { data } = useGetList("Theme", { page: 1, perPage: Infinity });
-//   const record = useRecordContext();
-//   if (!record) return null;
-//   const hasTopicStrings = record["pair:hasTopic"];
-
-//   let routeTree = [];
-//   for (const item in data) {
-//     if (data[item]["peps:broader"] === undefined ) {
-//       routeTree.push(data[item]);
-//     }
-//   }
-
-//   let hasTopic = [];
-//   if (Array.isArray(hasTopicStrings)) {
-//     hasTopicStrings.forEach(topicString => { 
-//       const topicStringArray = Object.entries(data).filter(([key, value]) => key === topicString);
-//       if (Array.isArray(topicStringArray) && Array.isArray(topicStringArray[0])) {
-//         hasTopic.push(topicStringArray[0][1]);
-//       }
-//     });
-//   }
-  
-//   return (
-//     <Grid item xs={12} sm={12} md={6} >
-//       {
-//         routeTree.map( route => 
-//           <Box className={classes.whiteBox}>
-//             <Typography className={classes.boxTitle}>{route["pair:label"] }</Typography>
-//             <Theme childThemes={hasTopic} parent={route.id}/>
-//           </Box>
-//         )
-//       }
-//     </Grid>
-//   )
-// }
-
 const Concept = ({selectedConcepts}) => {
   if (selectedConcepts.length === 0)
     return (<div><span style={{color: "#ABA093", paddingLeft: "5px"}}>Non Renseigné</span></div>)
