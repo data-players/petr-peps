@@ -90,11 +90,6 @@ module.exports = [
     preferredView: '/Accessibility',
     acceptedTypes: ['peps:Accessibility']
   },
-  {
-    path: '/hometrip',
-    preferredView: '/Hometrip',
-    acceptedTypes: ['peps:Hometrip']
-  },
   // {
   //   path: '/skills',
   //   preferredView: '/Skill',

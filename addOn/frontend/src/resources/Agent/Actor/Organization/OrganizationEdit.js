@@ -9,9 +9,9 @@ import {
 } from 'react-admin';
 import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
-import { ReferenceArrayInput, ReferenceInput } from '@semapps/input-components';
+import { ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput } from '../../../../common/input';
+import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput, AccessibilityInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 
@@ -60,12 +60,7 @@ export const OrganizationEdit = props => (
         <NeedsInput label="Besoin" source="peps:hasNeed" />
         <MobilitiesInput label="Mobilité" source="peps:hasMobility" />
         <LifestagesInput label="Etape de la vie" source="peps:hasLifeStage" />
-        <ReferenceArrayInput label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility" >
-          <SelectInput optionText="pair:label" />
-        </ReferenceArrayInput>
-        <ReferenceArrayInput label="Déplacement à Domicile" reference="Hometrip" source="peps:hasHomeTrip" >
-          <SelectInput optionText="pair:label" />
-        </ReferenceArrayInput>
+        <AccessibilityInput label="Accessibilité" source="peps:hasAccessibility" />
         {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>
