@@ -279,7 +279,7 @@ const handlePrint = () => {
                 <TextField source="pair:comment" className={classes.contactContent} />
               </Box>
               <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />
-              <TextFieldWithTitle source='peps:skills' title="COMPETENCE" />
+              <TextFieldWithTitle source='peps:skills' title="COMPETENCES" />
               <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />
               <TextFieldWithTitle source='peps:accommodationCapacity' title="CAPACITE D'ACCUEIL" />
               <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNE" />

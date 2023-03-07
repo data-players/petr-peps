@@ -11,7 +11,7 @@ export const LifestageEdit = props => (
     <TabbedForm redirect="show">
       <FormTab label="Données">
         <TextInput source="pair:label" fullWidth />
-        <MarkdownInput multiline source="pair:description" fullWidth />*
+        <MarkdownInput multiline source="pair:description" fullWidth />
         <TextInput label="Icone du thème" source="pair:icon" fullWidth />
         <ColorInput label="Couleur du thème" source="pair:color" />
       </FormTab>

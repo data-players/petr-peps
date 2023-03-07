@@ -4,7 +4,7 @@ export { default as Person } from './Agent/Actor/Person';
 export { default as Actor } from './Agent/Actor/Actor';
 
 // Concepts
-export { default as Theme } from './Concept/Theme';
+// export { default as Theme } from './Concept/Theme';
 export { default as Sector } from './Concept/Sector';
 export { default as Profile } from './Concept/Profile';
 export { default as Mobility } from './Concept/Mobility';

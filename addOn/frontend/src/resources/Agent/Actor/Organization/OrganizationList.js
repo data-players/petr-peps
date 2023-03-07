@@ -22,7 +22,7 @@ const OrganizationList = props => (
         list: (
           <SimpleList
             primaryText={record => record['pair:label']}
-            secondaryText={record => record['pair:comment']}
+            secondaryText={record => record['peps:type']}
             leftAvatar={record => (
               <Avatar src={record['image']} width="100%">
                 <HomeIcon />
@@ -42,7 +42,7 @@ const OrganizationList = props => (
             latitude={record => record['pair:hasLocation'] && record['pair:hasLocation']['pair:latitude']}
             longitude={record => record['pair:hasLocation'] && record['pair:hasLocation']['pair:longitude']}
             label={record => record['pair:label']}
-            description={record => record['pair:comment']}
+            description={record => record['peps:type']}
             scrollWheelZoom
           />
         )
