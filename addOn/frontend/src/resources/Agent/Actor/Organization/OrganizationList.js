@@ -8,6 +8,14 @@ import HomeIcon from '@material-ui/icons/Home';
 import OrganizationFilterSidebar from './OrganizationFilterSidebar';
 import SimpleList from "../../../../common/list/SimpleList";
 import List from "../../../../layout/list/List";
+import L from 'leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+L.Marker.prototype.options.icon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow
+});;
 
 const OrganizationList = props => (
   <MultiViewsList
@@ -45,6 +53,17 @@ const OrganizationList = props => (
             description={record => record['peps:type']}
             scrollWheelZoom
           />
+          // <MapContainer style={{ height: "100vh" }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+          //   <TileLayer
+          //     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          //   />
+          //   <Marker position={[51.505, -0.09]}>
+          //     <Popup>
+          //       A pretty CSS3 popup. <br /> Easily customizable.
+          //     </Popup>
+          //   </Marker>
+          // </MapContainer>
         )
       }
     }}
