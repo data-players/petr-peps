@@ -109,7 +109,7 @@ const SideConceptOrga = ({source, concept, title}) => {
   let selectedConcepts = [];
   if (record[source] !== undefined && Array.isArray(record[source])) {
     for (const item in data) {
-      record[source].foreach(e => {
+      record[source].map(e => {
         if (item === e) {
           selectedConcepts.push(data[item]);
         }
