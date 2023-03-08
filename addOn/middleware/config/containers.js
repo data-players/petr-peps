@@ -55,11 +55,11 @@ module.exports = [
   //   preferredView: '/Idea',
   //   acceptedTypes: ['pair:Idea']
   // },
-  // {
-  //   path: '/themes',
-  //   preferredView: '/Theme',
-  //   acceptedTypes: ['pair:Theme']
-  // },
+  {
+    path: '/themes',
+    preferredView: '/Theme',
+    acceptedTypes: ['pair:Theme']
+  },
   {
     path: '/sectors',
     preferredView: '/Sector',
