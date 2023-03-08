@@ -27,45 +27,6 @@
       "aurba:dataSourceOf": {
         "@type": "@id"
       },
-      "peps:accommodationCapacity": {
-        "@type": "@id"
-      },
-      "peps:concernedPublic": {
-        "@type": "@id"
-      },
-      "peps:homeTrip": {
-        "@type": "@id"
-      },
-      "peps:skills": {
-        "@type": "@id"
-      },
-      "peps:dataSource": {
-        "@type": "@id"
-      },
-      "peps:openHour": {
-        "@type": "@id"
-      },
-      "peps:type": {
-        "@type": "@id"
-      },
-      "peps:hasSector": {
-        "@type": "@id"
-      },
-      "peps:hasProfile": {
-        "@type": "@id"
-      },
-      "peps:hasNeed": {
-        "@type": "@id"
-      },
-      "peps:hasMobility": {
-        "@type": "@id"
-      },
-      "peps:hasLifeStage": {
-        "@type": "@id"
-      },
-      "peps:hasAccessibility": {
-        "@type": "@id"
-      },
       "pair:image": {
         "@type": "@id"
       },
