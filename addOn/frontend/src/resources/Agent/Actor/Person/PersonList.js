@@ -7,7 +7,7 @@ import MapIcon from '@material-ui/icons/Map';
 import ListIcon from '@material-ui/icons/List';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PersonFilterSidebar from './PersonFilterSidebar';
+// import PersonFilterSidebar from './PersonFilterSidebar';
 import SimpleList from "../../../../common/list/SimpleList";
 import List from "../../../../layout/list/List";
 
