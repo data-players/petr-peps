@@ -69,36 +69,42 @@ const ProjectFilterSidebar = () => {
           reference="Sector"
           source="peps:hasSector"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
         <ReferenceFilter
           reference="Profile"
           source="peps:hasProfile"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
         <ReferenceFilter
           reference="Need"
           source="peps:hasNeed"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
         <ReferenceFilter
           reference="Mobility"
           source="peps:hasMobility"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
         <ReferenceFilter
           reference="Lifestage"
           source="peps:hasLifeStage"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
         <ReferenceFilter
           reference="Accessibility"
           source="peps:hasAccessibility"
           limit={100}
+          showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
       </CardContent>
