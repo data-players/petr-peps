@@ -1,0 +1,175 @@
+@prefix : <https://data.petr-peps.data-players.com/ontology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix grddl: <http://www.w3.org/2003/g/data-view#> .
+@base <https://data.petr-peps.data-players.com/ontology> .
+
+<https://data.petr-peps.data-players.com/ontology> rdf:type owl:Ontology ;
+                                                    owl:imports <http://virtual-assembly.org/ontologies/pair> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://data.petr-peps.data-players.com/ontology#accessibilityOf
+:accessibilityOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+                 owl:inverseOf :hasAccessibility ;
+                 rdfs:domain :Accessibility ;
+                 rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasAccessibility
+:hasAccessibility rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+                  rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+                  rdfs:range :Accessibility .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasLifeStage
+:hasLifeStage rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+              owl:inverseOf :lifeStageOf ;
+              rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+              rdfs:range :Lifestage .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasMobility
+:hasMobility rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+             owl:inverseOf :mobilityOf ;
+             rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+             rdfs:range :Mobility .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasNeed
+:hasNeed rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+         owl:inverseOf :needOf ;
+         rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+         rdfs:range :Need .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasProfile
+:hasProfile rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+            owl:inverseOf :profileOf ;
+            rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+            rdfs:range :Profil .
+
+
+###  https://data.petr-peps.data-players.com/ontology#hasSector
+:hasSector rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+           rdfs:range :Sector .
+
+
+###  https://data.petr-peps.data-players.com/ontology#lifeStageOf
+:lifeStageOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+             rdfs:domain :Lifestage ;
+             rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#mobilityOf
+:mobilityOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+            rdfs:domain :Mobility ;
+            rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#needOf
+:needOf rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+        rdfs:domain :Need ;
+        rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#profileOf
+:profileOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+           rdfs:domain :Profil ;
+           rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#sectorOf
+:sectorOf rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#entityConceptProperty> ;
+          rdfs:domain :Sector ;
+          rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://data.petr-peps.data-players.com/ontology#accommodationCapacity
+:accommodationCapacity rdf:type owl:DatatypeProperty ;
+                       rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+                       rdfs:range xsd:string .
+
+
+###  https://data.petr-peps.data-players.com/ontology#concernedPublic
+:concernedPublic rdf:type owl:DatatypeProperty ;
+                 rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+                 rdfs:range xsd:string .
+
+
+###  https://data.petr-peps.data-players.com/ontology#dataSource
+:dataSource rdf:type owl:DatatypeProperty ;
+            rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+            rdfs:range xsd:string .
+
+
+###  https://data.petr-peps.data-players.com/ontology#skills
+:skills rdf:type owl:DatatypeProperty ;
+        rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+        rdfs:range xsd:string .
+
+
+###  https://data.petr-peps.data-players.com/ontology#type
+:type rdf:type owl:DatatypeProperty ;
+      rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+      rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://data.petr-peps.data-players.com/ontology#Accessibility
+:Accessibility rdf:type owl:Class ;
+               rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#Lifestage
+:Lifestage rdf:type owl:Class ;
+           rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#Mobility
+:Mobility rdf:type owl:Class ;
+          rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#Need
+:Need rdf:type owl:Class ;
+      rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#Profil
+:Profil rdf:type owl:Class ;
+        rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  https://data.petr-peps.data-players.com/ontology#Sector
+:Sector rdf:type owl:Class ;
+        rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
