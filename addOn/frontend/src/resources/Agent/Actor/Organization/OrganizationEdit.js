@@ -8,7 +8,6 @@ import {
   FormTab,
   CheckboxGroupInput,
   AutocompleteArrayInput,
-  required,
 } from 'react-admin';
 import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
@@ -17,7 +16,6 @@ import { MarkdownInput } from '@semapps/markdown-components';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 import { LocationInput } from '../../../../common/input';
-
 
 export const OrganizationEdit = props => (
   <Edit title={<OrganizationTitle />} {...props}>
@@ -59,23 +57,23 @@ export const OrganizationEdit = props => (
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
         {/* <SectorsInput label="Secteurs Géographique" source="peps:hasSector" /> */}
-        <ReferenceArrayInput label="Secteurs Géographique" source="peps:hasSector" reference="Sector" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Secteurs Géographique" source="peps:hasSector" reference="Sector" fullWidth >
           <AutocompleteArrayInput optionText="pair:label" />
         </ReferenceArrayInput>     
-        <ReferenceArrayInput label="Profil Prioritaire" source="peps:hasProfile" reference="Profile" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Profil Prioritaire" source="peps:hasProfile" reference="Profile" fullWidth >
           <AutocompleteArrayInput optionText="pair:label" />
         </ReferenceArrayInput>
-        <ReferenceArrayInput label="Besoin" source="peps:hasNeed" reference="Need" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Besoin" source="peps:hasNeed" reference="Need" fullWidth >
           <AutocompleteArrayInput optionText="pair:label" />
         </ReferenceArrayInput>
-        <ReferenceArrayInput label="Mobilité" source="peps:hasMobility" reference="Mobility" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Mobilité" source="peps:hasMobility" reference="Mobility" fullWidth >
           <AutocompleteArrayInput optionText="pair:label" />
         </ReferenceArrayInput>
-        <ReferenceArrayInput label="Étape de la vie" source="peps:hasLifestage" reference="Lifestage" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Étape de la vie" source="peps:hasLifeStage" reference="Lifestage" fullWidth >
           <CheckboxGroupInput optionText="pair:label" />
         </ReferenceArrayInput>
         {/* <AccessibilityInput label="Accessibilité" source="peps:hasAccessibility" /> */}
-        <ReferenceArrayInput label="Accessibilité" source="peps:hasAccessibility" reference="Accessibility" fullWidth validate={[required()]}>
+        <ReferenceArrayInput label="Accessibilité" source="peps:hasAccessibility" reference="Accessibility" fullWidth >
           <CheckboxGroupInput optionText="pair:label" />
         </ReferenceArrayInput>
         {/* <DocumentsInput source="pair:documentedBy" /> */}
