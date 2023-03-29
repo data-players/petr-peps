@@ -184,8 +184,13 @@ const PrintTitle = () => {
 const UpdateComp = ({title}) => {
   const classes = useStyles();
   const record = useRecordContext();
-  if (!record) return null;
-  console.log(record["dc:modified"]["@value"])
+  if (!record || !record["dc:modified"]["@value"]) {
+    return (
+      <Box style={{marginBottom: "20px"}}>
+        <div className={classes.updateAt}>{title+" : Donnée non disponible"}</div>
+      </Box>
+    );
+  }
   const updatedAt = format(new Date(record["dc:modified"]["@value"]), "dd/MM/yyyy");
   return (
     <Box style={{marginBottom: "20px"}}>
