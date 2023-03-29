@@ -79,7 +79,7 @@ const AppBar = props => {
       classes={{ toolbar: classes.toolbar, menuButton: classes.menuButton, ...props.classes }}
       color="primary"
     >
-      <Link to="/">
+      <Link to="/Organization">
         <div className={classes.presContainer}>
           <div className={classes.logoContainer}>
             <Zoom in={true} timeout={2000}>

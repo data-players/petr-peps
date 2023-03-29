@@ -38,6 +38,8 @@ const OrganizationList = props => (
             description={record => record['peps:type']}
             popupContent={PopupContent}
             scrollWheelZoom
+            center= {[46.42816, 4.66527]}
+            zoom= {11}
           />
           // <MapContainer style={{ height: "100vh" }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
           //   <TileLayer

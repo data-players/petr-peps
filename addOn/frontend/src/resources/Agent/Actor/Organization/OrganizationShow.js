@@ -21,10 +21,9 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: "20px",
     paddingBlock: "20px",
     color: theme.palette.primary.main,
-    marginBottom: '40px',
     fontWeight: 'bold',
     fontSize: GroupedFontSize(-2),
-    margin: "40px",
+    margin: "0px 40px 20px 40px",
     overflow: "hidden",
   },
   contentRightBox: {
@@ -77,11 +76,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: GroupedFontSize(-2)
   },
   printTitle: {
-    color: theme.palette.primary.main, 
+    color: theme.palette.secondary.main, 
     fontSize: GroupedFontSize(8),
     fontWeight: "bold",
     paddingTop: "10px",
-    paddingLeft: "40px"
+    paddingLeft: "80px"
   },
   sideGrid: {
     padding: "0px"
@@ -100,12 +99,12 @@ const Icon = ({ name, ...rest }) => {
 
 const Concept = ({selectedConcepts}) => {
   if (selectedConcepts.length === 0)
-    return (<div><span style={{color: "#ABA093", paddingLeft: "5px"}}>Non Renseigné</span></div>)
+    return (<div><span style={{color: "#ABA093", paddingLeft: "2px"}}>Non Renseigné</span></div>)
   return (
     selectedConcepts.map(concept => 
       <div style={{display: "flex", alignItems: "center", paddingLeft:"5px"}}>
-        {<Icon name={concept["pair:icon"]} style={{color: concept["pair:color"], fontSize: GroupedFontSize(15)}}/>} 
-        <span style={{color: concept["pair:color"], fontSize: GroupedFontSize(0), paddingLeft:"5px"}}>{concept["pair:label"]}</span>
+        {<Icon name={concept["pair:icon"]} style={{color: concept["pair:color"], fontSize: GroupedFontSize(13)}}/>} 
+        <span style={{color: concept["pair:color"], fontSize: GroupedFontSize(-2), paddingLeft:"5px"}}>{concept["pair:label"]}</span>
       </div>
     )
   )
@@ -233,7 +232,7 @@ const handlePrint = () => {
       <Show title={<OrganizationTitle />} {...props}>
         <Grid container spacing={5} ref={printRef} >
           {isPrinting ? <Grid item xs={12} sm={12} md={12}><PrintTitle/></Grid> : null}
-          <Grid item xs={12} sm={12} md={4} style={{padding: "0px", paddingLeft: "3%"}} >
+          <Grid item xs={12} sm={12} md={5} style={{padding: "40px 0px 0px 7%"}} >
             <SideConceptOrga source="peps:hasSector" concept="Sector" title="Sécteur Géographique" />
             <SideConceptOrga source="peps:hasProfile" concept="Profile" title="Profil Prioritaire" />
             <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Étape de la vie" />
@@ -241,7 +240,7 @@ const handlePrint = () => {
             <SideConceptOrga source="peps:hasMobility" concept="Mobility" title="Mobilité" />
             <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
           </Grid>
-          <Grid item xs={12} sm={12} md={8} style={{padding: "0px 3% 0px 0px"}} >
+          <Grid item xs={12} sm={12} md={7} style={{padding: "0px 7% 0px 0px"}} >
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
               <TextFieldWithTitle title="COORDONNÉES" source='pair:hasLocation.pair:label' check="true"/>
