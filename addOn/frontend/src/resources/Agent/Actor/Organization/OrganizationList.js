@@ -12,6 +12,7 @@ import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import ListActionsWithViews from './ListActionsWithViews';
+import PopupContent from './PopupContent';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: icon,
@@ -35,6 +36,7 @@ const OrganizationList = props => (
             longitude={record => record['pair:hasLocation'] && record['pair:hasLocation']['pair:longitude']}
             label={record => record['pair:label']}
             description={record => record['peps:type']}
+            popupContent={PopupContent}
             scrollWheelZoom
           />
           // <MapContainer style={{ height: "100vh" }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
