@@ -184,7 +184,7 @@ const PrintTitle = () => {
 const UpdateComp = ({title}) => {
   const classes = useStyles();
   const record = useRecordContext();
-  if (!record || !record["dc:modified"]["@value"]) {
+  if (!record || !record["dc:modified"]) {
     return (
       <Box style={{marginBottom: "20px"}}>
         <div className={classes.updateAt}>{title+" : Donnée non disponible"}</div>
