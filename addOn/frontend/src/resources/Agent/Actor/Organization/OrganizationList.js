@@ -11,6 +11,7 @@ import List from "../../../../layout/list/List";
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import ListActionsWithViews from './ListActionsWithViews';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: icon,
@@ -20,26 +21,9 @@ L.Marker.prototype.options.icon = L.icon({
 const OrganizationList = props => (
   <MultiViewsList
     ListComponent={List}
+    actions={<ListActionsWithViews />}
     aside={<OrganizationFilterSidebar />}
     views={{
-      list: {
-        label: 'Liste',
-        icon: ListIcon,
-        sort: { field: 'pair:label', order: 'ASC' },
-        perPage: 25,
-        list: (
-          <SimpleList
-            primaryText={record => record['pair:label']}
-            secondaryText={record => record['peps:type']}
-            leftAvatar={record => (
-              <Avatar src={record['image']} width="100%">
-                <HomeIcon />
-              </Avatar>
-            )}
-            linkType="show"
-          />
-        )
-      },
       map: {
         label: 'Carte',
         icon: MapIcon,
@@ -65,7 +49,25 @@ const OrganizationList = props => (
           //   </Marker>
           // </MapContainer>
         )
-      }
+      },
+      list: {
+        label: 'Liste',
+        icon: ListIcon,
+        sort: { field: 'pair:label', order: 'ASC' },
+        perPage: 25,
+        list: (
+          <SimpleList
+            primaryText={record => record['pair:label']}
+            secondaryText={record => record['peps:type']}
+            leftAvatar={record => (
+              <Avatar src={record['image']} width="100%">
+                <HomeIcon />
+              </Avatar>
+            )}
+            linkType="show"
+          />
+        )
+      },
     }}
     {...props}
   />

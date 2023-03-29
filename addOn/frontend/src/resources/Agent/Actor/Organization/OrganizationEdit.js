@@ -11,9 +11,11 @@ import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
 import { ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
+import { ChipList } from '@semapps/list-components';
 import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput, AccessibilityInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
+import QuickAppendReferenceArrayField from "./QuickAppendReferenceArrayField/QuickAppendReferenceArrayField";
 
 export const OrganizationEdit = props => (
   <Edit title={<OrganizationTitle />} {...props}>
@@ -54,12 +56,30 @@ export const OrganizationEdit = props => (
       <FormTab label="Concepts">
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
-        <SectorsInput label="Secteurs Géographique" source="peps:hasSector" />
-        <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" />
-        <NeedsInput label="Besoin" source="peps:hasNeed" />
-        <MobilitiesInput label="Mobilité" source="peps:hasMobility" />
-        <LifestagesInput label="Etape de la vie" source="peps:hasLifeStage" />
-        <AccessibilityInput label="Accessibilité" source="peps:hasAccessibility" />
+        {/* <SectorsInput label="Secteurs Géographique" source="peps:hasSector" /> */}
+        <QuickAppendReferenceArrayField label="Secteurs Géographique" reference="Sector" source="peps:hasSector">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>  
+        {/* <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" /> */}
+        <QuickAppendReferenceArrayField label="Profil Prioritaire" reference="Profile" source="peps:hasProfile">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>
+        {/* <NeedsInput label="Besoin" source="peps:hasNeed" /> */}
+        <QuickAppendReferenceArrayField label="Besoin" reference="Need" source="peps:hasNeed">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>
+        {/* <MobilitiesInput label="Mobilité" source="peps:hasMobility" /> */}
+        <QuickAppendReferenceArrayField label="Mobilité" reference="Mobility" source="peps:hasMobility">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>
+        {/* <LifestagesInput label="Étape de la vie" source="peps:hasLifeStage" /> */}
+        <QuickAppendReferenceArrayField label="Étape de la vie" reference="Lifestage" source="peps:hasLifestage">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>
+        {/* <AccessibilityInput label="Accessibilité" source="peps:hasAccessibility" /> */}
+        <QuickAppendReferenceArrayField label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility">
+          <ChipList primaryText="pair:label" linkType="show" externalLinks />
+        </QuickAppendReferenceArrayField>        
         {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>

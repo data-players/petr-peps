@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       '& #main-content': {
         paddingTop: 8,
-        paddingLeft: 5
+        paddingLeft: 5,
       }
     },
   }
@@ -24,7 +24,7 @@ const Layout = ({ appBar, menu, userMenu, children, labelNbLines, ...otherProps 
   return (
     <RaLayout
       {...otherProps}
-      classes={{ appFrame: classes.appFrame }}
+      classes={{ appFrame: classes.appFrame } }
       appBar={appBar}
       menu={menu ? menu : LayoutTreeMenu}
     >

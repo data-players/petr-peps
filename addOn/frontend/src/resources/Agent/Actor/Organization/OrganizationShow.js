@@ -8,16 +8,22 @@ import Show from "../../../../layout/show/Show";
 import { makeStyles } from '@material-ui/core/styles';
 import * as Muicon from '@mui/icons-material';
 import { useReactToPrint } from 'react-to-print';
+import { format } from 'date-fns'
+
+const GroupedFontSize = (fontcounter) => {
+  const GrfontSize = 18 + fontcounter;
+  return GrfontSize.toString()+"px"
+}
 
 const useStyles = makeStyles(theme => ({
   whiteBox: {
     border: "5px solid " + theme.palette.primary.main,
-    paddingLeft: '20px',
+    paddingLeft: "20px",
     paddingBlock: "20px",
     color: theme.palette.primary.main,
     marginBottom: '40px',
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: GroupedFontSize(-2),
     margin: "40px",
     overflow: "hidden",
   },
@@ -26,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
   boxTitle: {
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: GroupedFontSize(-2),
     color: theme.palette.primary.main,
     textTransform: "uppercase;"
   },
@@ -37,15 +43,15 @@ const useStyles = makeStyles(theme => ({
   rightTitle: {
     color: theme.palette.primary.main,
     fontWeight: "bold",
-    fontSize: "23px",
+    fontSize: GroupedFontSize(3),
   },
   contactTitle:{
     color: theme.palette.primary.main,
     fontWeight: "bold",
-    fontSize: "18px",
+    fontSize: GroupedFontSize(-2),
   },
   contactContent: {
-    fontSize: "18px",
+    fontSize: GroupedFontSize(-2),
     color: theme.palette.primary.main,
     paddingBottom: "20px",
   },
@@ -64,22 +70,27 @@ const useStyles = makeStyles(theme => ({
   },
   heal: {
     color: "#90be48",
-    fontSize: "13px",
+    fontSize: GroupedFontSize(-7),
   },
   markdownText: {
     color: theme.palette.primary.main, 
-    fontSize: "18px"
+    fontSize: GroupedFontSize(-2)
   },
   printTitle: {
     color: theme.palette.primary.main, 
-    fontSize: "28px",
+    fontSize: GroupedFontSize(8),
     fontWeight: "bold",
     paddingTop: "10px",
     paddingLeft: "40px"
   },
   sideGrid: {
     padding: "0px"
-  }
+  },
+  updateAt: {
+    color: theme.palette.primary.main,
+    fontWeight: "bold",
+    fontSize: GroupedFontSize(-1),
+  },
 })); 
 
 const Icon = ({ name, ...rest }) => {
@@ -93,8 +104,8 @@ const Concept = ({selectedConcepts}) => {
   return (
     selectedConcepts.map(concept => 
       <div style={{display: "flex", alignItems: "center", paddingLeft:"5px"}}>
-        {<Icon name={concept["pair:icon"]} style={{color: concept["pair:color"], fontSize: "35px"}}/>} 
-        <span style={{color: concept["pair:color"], fontSize: "20px", paddingLeft:"5px"}}>{concept["pair:label"]}</span>
+        {<Icon name={concept["pair:icon"]} style={{color: concept["pair:color"], fontSize: GroupedFontSize(15)}}/>} 
+        <span style={{color: concept["pair:color"], fontSize: GroupedFontSize(0), paddingLeft:"5px"}}>{concept["pair:label"]}</span>
       </div>
     )
   )
@@ -170,6 +181,19 @@ const PrintTitle = () => {
  )
 }
 
+const UpdateComp = ({title}) => {
+  const classes = useStyles();
+  const record = useRecordContext();
+  if (!record) return null;
+  console.log(record["dc:modified"]["@value"])
+  const updatedAt = format(new Date(record["dc:modified"]["@value"]), "dd/MM/yyyy");
+  return (
+    <Box style={{marginBottom: "20px"}}>
+        <div className={classes.updateAt}>{title+" : "+updatedAt}</div>
+      </Box>
+  )
+}
+
 const OrganizationShow = React.forwardRef((props) => {
   const classes = useStyles();
   const [isPrinting, setIsPrinting] = useState(false);
@@ -204,27 +228,28 @@ const handlePrint = () => {
       <Show title={<OrganizationTitle />} {...props}>
         <Grid container spacing={5} ref={printRef} >
           {isPrinting ? <Grid item xs={12} sm={12} md={12}><PrintTitle/></Grid> : null}
-          <Grid item xs={12} sm={12} md={6} style={{padding: "0px", paddingLeft: "1%"}} >
-            <SideConceptOrga source="peps:hasSector" concept="Sector" title="Secteur Géographique" />
+          <Grid item xs={12} sm={12} md={4} style={{padding: "0px", paddingLeft: "3%"}} >
+            <SideConceptOrga source="peps:hasSector" concept="Sector" title="Sécteur Géographique" />
             <SideConceptOrga source="peps:hasProfile" concept="Profile" title="Profil Prioritaire" />
-            <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Etape de la vie" />
+            <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Étape de la vie" />
             <SideConceptOrga source="peps:hasNeed" concept="Need" title="Besoin" />
             <SideConceptOrga source="peps:hasMobility" concept="Mobility" title="Mobilité" />
             <SideConceptOrga source="peps:hasAccessibility" concept="Accessibility" title="Accessibilité" />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} style={{padding: "0px 30px 0px 0px"}} >
+          <Grid item xs={12} sm={12} md={8} style={{padding: "0px 3% 0px 0px"}} >
             <Box className={classes.contentRightBox}>
               <TextFieldWithTitle title="TYPE DE STRUCTURE" source='peps:type'/>
-              <TextFieldWithTitle title="COORDONNEES" source='pair:hasLocation.pair:label' check="true"/>
+              <TextFieldWithTitle title="COORDONNÉES" source='pair:hasLocation.pair:label' check="true"/>
               <Box style={{marginBottom: "20px"}}>
                 <TextField source="pair:comment" className={classes.contactContent} />
               </Box>
               <MarkdownFieldWithTitle source="pair:description" title="INFORMATIONS" />
-              <TextFieldWithTitle source='peps:skills' title="COMPETENCES" />
+              <TextFieldWithTitle source='peps:skills' title="COMPÉTENCES" />
               <TextFieldWithTitle source='peps:openHour' title="OUVERTURE" />
               <TextFieldWithTitle source='peps:accommodationCapacity' title="CAPACITE D'ACCUEIL" />
-              <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNE" />
-              <TextFieldWithTitle source='peps:dataSource' title="SOURCE DE DONNEES" />
+              <TextFieldWithTitle source="peps:concernedPublic" title="PUBLIC CONCERNÉ" />
+              <TextFieldWithTitle source='peps:dataSource' title="SOURCE DE DONNÉES" />
+              <UpdateComp title="Dernière modification" />
               {isPrinting ? null : <button onClick={handlePrint} className={classes.printButton} >IMPRIMER</button>}
             </Box>
           </Grid>
