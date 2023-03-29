@@ -5,17 +5,19 @@ import {
   AutocompleteInput,
   SelectInput,
   TabbedForm,
-  FormTab
+  FormTab,
+  CheckboxGroupInput,
+  AutocompleteArrayInput,
+  required,
 } from 'react-admin';
 import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
-import { ReferenceInput } from '@semapps/input-components';
+import { ReferenceInput, ReferenceArrayInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import { ChipList } from '@semapps/list-components';
-import { MobilitiesInput, SectorsInput, ProfilesInput, NeedsInput, LifestagesInput, LocationInput, AccessibilityInput } from '../../../../common/input';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
-import QuickAppendReferenceArrayField from "./QuickAppendReferenceArrayField/QuickAppendReferenceArrayField";
+import { LocationInput } from '../../../../common/input';
+
 
 export const OrganizationEdit = props => (
   <Edit title={<OrganizationTitle />} {...props}>
@@ -57,29 +59,25 @@ export const OrganizationEdit = props => (
         {/* <OrganizationsInput source="pair:partnerOf" /> */}
         {/* <EventsInput source="pair:involvedIn" /> */}
         {/* <SectorsInput label="Secteurs Géographique" source="peps:hasSector" /> */}
-        <QuickAppendReferenceArrayField label="Secteurs Géographique" reference="Sector" source="peps:hasSector">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>  
-        {/* <ProfilesInput label="Profil Prioritaire" source="peps:hasProfile" /> */}
-        <QuickAppendReferenceArrayField label="Profil Prioritaire" reference="Profile" source="peps:hasProfile">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>
-        {/* <NeedsInput label="Besoin" source="peps:hasNeed" /> */}
-        <QuickAppendReferenceArrayField label="Besoin" reference="Need" source="peps:hasNeed">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>
-        {/* <MobilitiesInput label="Mobilité" source="peps:hasMobility" /> */}
-        <QuickAppendReferenceArrayField label="Mobilité" reference="Mobility" source="peps:hasMobility">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>
-        {/* <LifestagesInput label="Étape de la vie" source="peps:hasLifeStage" /> */}
-        <QuickAppendReferenceArrayField label="Étape de la vie" reference="Lifestage" source="peps:hasLifestage">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>
+        <ReferenceArrayInput label="Secteurs Géographique" source="peps:hasSector" reference="Sector" fullWidth validate={[required()]}>
+          <AutocompleteArrayInput optionText="pair:label" />
+        </ReferenceArrayInput>     
+        <ReferenceArrayInput label="Profil Prioritaire" source="peps:hasProfile" reference="Profile" fullWidth validate={[required()]}>
+          <AutocompleteArrayInput optionText="pair:label" />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput label="Besoin" source="peps:hasNeed" reference="Need" fullWidth validate={[required()]}>
+          <AutocompleteArrayInput optionText="pair:label" />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput label="Mobilité" source="peps:hasMobility" reference="Mobility" fullWidth validate={[required()]}>
+          <AutocompleteArrayInput optionText="pair:label" />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput label="Étape de la vie" source="peps:hasLifestage" reference="Lifestage" fullWidth validate={[required()]}>
+          <CheckboxGroupInput optionText="pair:label" />
+        </ReferenceArrayInput>
         {/* <AccessibilityInput label="Accessibilité" source="peps:hasAccessibility" /> */}
-        <QuickAppendReferenceArrayField label="Accessibilité" reference="Accessibility" source="peps:hasAccessibility">
-          <ChipList primaryText="pair:label" linkType="show" externalLinks />
-        </QuickAppendReferenceArrayField>        
+        <ReferenceArrayInput label="Accessibilité" source="peps:hasAccessibility" reference="Accessibility" fullWidth validate={[required()]}>
+          <CheckboxGroupInput optionText="pair:label" />
+        </ReferenceArrayInput>
         {/* <DocumentsInput source="pair:documentedBy" /> */}
       </FormTab>
     </TabbedForm>

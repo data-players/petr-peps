@@ -1,4 +1,5 @@
 import React from 'react';
+import { SelectArrayInput } from 'react-admin';
 import { ReferenceArrayInput, MultiServerAutocompleteArrayInput } from "@semapps/input-components";
 
 const ifTwoLetters = ({ q }) => !!(q && q.length > 1);
@@ -90,7 +91,7 @@ export const LifestagesInput = ({ label, source }) => (
 
 export const AccessibilityInput = ({ label, source }) => (
   <ReferenceArrayInput label={label} reference="Accessibility" source={source} enableGetChoices={ifTwoLetters} filter={filterOnlyLabel}>
-    <MultiServerAutocompleteArrayInput optionText="pair:label" shouldRenderSuggestions={value => value.length > 1} fullWidth />
+    <SelectArrayInput optionText="pair:label" shouldRenderSuggestions={value => value.length > 1} fullWidth />
   </ReferenceArrayInput>
 );
 
