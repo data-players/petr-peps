@@ -2,16 +2,13 @@ import React from 'react';
 import {
   TextInput,
   ImageInput,
-  AutocompleteInput,
-  SelectInput,
   TabbedForm,
   FormTab,
   CheckboxGroupInput,
   AutocompleteArrayInput,
 } from 'react-admin';
-import { ReificationArrayInput } from '@semapps/semantic-data-provider';
 import { ImageField } from '@semapps/field-components';
-import { ReferenceInput, ReferenceArrayInput } from '@semapps/input-components';
+import { ReferenceArrayInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
