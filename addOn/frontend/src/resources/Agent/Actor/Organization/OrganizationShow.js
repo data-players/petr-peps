@@ -230,9 +230,9 @@ const handlePrint = () => {
 
   return (
       <Show title={<OrganizationTitle />} {...props}>
-        <Grid container spacing={5} ref={printRef} >
-          {isPrinting && <Grid item xs={12} sm={12} md={12}><PrintTitle/></Grid> }
-          <Grid item xs={12} sm={12} md={5} style={isPrinting ? {padding: "40px 0px 0px 8%"} : {padding: "40px 0px 0px 2%"}} >
+        <Grid container spacing={5} ref={printRef} style={{backgroundColor: "white"}} >
+          {isPrinting && <Grid item xs={12} sm={12} md={12} style={{paddingTop: "40px"}} ><PrintTitle /></Grid> }
+          <Grid item xs={12} sm={12} md={5} style={isPrinting ? {padding: "10px 0px 0px 8%"} : {padding: "40px 0px 0px 2%"}} >
             <SideConceptOrga source="peps:hasSector" concept="Sector" title="Sécteur Géographique" />
             <SideConceptOrga source="peps:hasProfile" concept="Profile" title="Profil Prioritaire" />
             <SideConceptOrga source="peps:hasLifeStage" concept="Lifestage" title="Étape de la vie" />
