@@ -14,10 +14,10 @@ module.exports = {
       password: CONFIG.BACKUP_SERVER_PASSWORD,
       host: CONFIG.BACKUP_SERVER_HOST,
       path: CONFIG.BACKUP_SERVER_PATH,
-      port: 22
+      port: CONFIG.BACKUP_SERVER_PORT
     },
     cronJob: {
-      time: '15 4 * * *', // Every night at 4am
+      time: '5 4 * * *', // Every night at 4am
       timeZone: 'Europe/Paris'
     }
   }

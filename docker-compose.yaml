@@ -30,6 +30,7 @@ services:
       - './middleware/uploads:/archipelago/middleware/uploads'
       - './addOn:/archipelago/middleware/addOn'
       - './data/fuseki/databases/localData:/localData'
+      - './data/fuseki/backups:/app/fuseki-backups' # Needed to backup fuseki datasets
     environment:
       - 'SEMAPPS_SPARQL_ENDPOINT=http://fuseki:3030/'
       - SEMAPPS_MAIN_DATASET=localData
@@ -39,6 +40,12 @@ services:
       - 'SEMAPPS_OIDC_ISSUER=https://login.lescommuns.org/auth/realms/master/'
       - SEMAPPS_OIDC_CLIENT_ID=semapps
       - 'SEMAPPS_REDIS_URL=redis://redis:6379/0'
+      - SEMAPPS_BACKUP_SERVER_USER=backup
+      - SEMAPPS_BACKUP_SERVER_PASSWORD=b4ckup8462
+      - SEMAPPS_BACKUP_SERVER_HOST=ftp-ftpgo.data-players.com
+      - SEMAPPS_BACKUP_SERVER_PORT=2022
+      - SEMAPPS_BACKUP_SERVER_PATH=/backups/petr/peps/backups/datasets
+      - SEMAPPS_BACKUP_FUSEKI_DATASETS_PATH=/app/fuseki-backups/
     command: bash -c "cp -r ./addOn/middleware/* . && pm2-runtime 'yarn run dev'"
     networks:
       - semapps
@@ -49,7 +56,7 @@ services:
     image: dataplayers/archipelago-frontend:0.8
     environment:
       - 'REACT_APP_MIDDLEWARE_URL=http://localhost:3000/'
-      - REACT_APP_MAPBOX_ACCESS_TOKEN=
+      - REACT_APP_MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijoic3Jvc3NldDgxIiwiYSI6ImNrbDd0b2VkMzA1dDMycG9iemU4NnpuemsifQ.HvpZ3tnweVHEUYLb0tDvTg
       - PORT=4000
     volumes:
       - ./addOn:/archipelago/frontend/addOn
