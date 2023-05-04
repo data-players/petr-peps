@@ -7,7 +7,7 @@ import { useStore } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    paddingTop: 0,
+    padding: "10px",
     [theme.breakpoints.up('sm')]: {
       minWidth: '15em',
       marginLeft: '1em'
@@ -18,10 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     paddingTop: 0
-  },
-  searchBar: {
-    padding: "10px"
-  },
+  }
 }));
 
 const FilterText = ({ input, ...otherProps }) => <TextField {...input} {...otherProps} />;
@@ -46,7 +43,7 @@ const ProjectFilterSidebar = () => {
     }
   };
   return (
-    <Card className={classes.searchBar}>
+    <Card className={classes.card}>
       <Form
       onSubmit={onSubmit}
       initialValues={{ type: currentType, filter: qFilter ? qFilter : '' }}
