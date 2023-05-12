@@ -57,9 +57,8 @@ module.exports = {
       'https://data.petr-peps.data-players.com/users/simon.louvet.zen',
       'https://data.petr-peps.data-players.com/users/bastien.siguier1',
       'https://data.petr-peps.data-players.com/users/acordier',
-      'https://data.petr-msb.data-players.com/users/bplassard',
-      'https://data.petr-msb.data-players.com/users/xavier',
-    ]
-    }
+      'https://data.petr-peps.data-players.com/users/bplassard',
+      'https://data.petr-peps.data-players.com/users/xavier', 
+    ]}
   }
 };
