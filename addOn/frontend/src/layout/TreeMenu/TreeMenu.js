@@ -54,6 +54,7 @@ const TreeMenu = ({ onMenuClick, logout, dense = false, openAll = false, labelNb
   // const open = useSelector(state => state.admin.ui.sidebarOpen);
   const resources = useSelector(getResources);
   const isIframe = window !== window.top;
+  const isAuthicate = localStorage.getItem('token') !== null
 
   // TODO create a specialized hook, as this is used several times in the layout (which cannot use useResourceDefinition)
   const location = useLocation();
@@ -90,7 +91,7 @@ const TreeMenu = ({ onMenuClick, logout, dense = false, openAll = false, labelNb
   }, [categories, resources, currentResourceName, openAll]);
 
   return (
-    <Box mt={2} style={isIframe ? {display: "none"} : {}} className={labelNbLines === 1 ? classes.treeMenuOneRowLabel : classes.treeMenu}>
+    <Box mt={2} style={isIframe || !isAuthicate ? {display: "none"} : {}} className={labelNbLines === 1 ? classes.treeMenuOneRowLabel : classes.treeMenu}>
       {menuRootItems.map(menuRootItem => (
         <Box key={menuRootItem.name}>
           {categories.includes(menuRootItem) ? (

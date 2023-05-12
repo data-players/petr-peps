@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Layout as RaLayout } from 'react-admin';
+import { Layout as RaLayout, useAuthenticated } from 'react-admin';
 import { makeStyles } from '@material-ui/core';
 import AppBar from './AppBar';
 import TreeMenu from './TreeMenu/TreeMenu';
@@ -20,13 +20,14 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ appBar, menu, userMenu, children, labelNbLines, ...otherProps }) => {
   const classes = useStyles();
+
   const LayoutTreeMenu = useMemo(() => props => <TreeMenu {...props} labelNbLines={labelNbLines} />, [labelNbLines]);
   return (
     <RaLayout
       {...otherProps}
       classes={{ appFrame: classes.appFrame } }
       appBar={appBar}
-      menu={menu ? menu : LayoutTreeMenu}
+      menu={menu ? menu : LayoutTreeMenu} 
     >
       {children}
     </RaLayout>

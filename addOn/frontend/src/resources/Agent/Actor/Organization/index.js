@@ -45,7 +45,6 @@ export default {
         'pair:hasLocation': 'Adresse',
         'pair:organizationOfMembership': 'Membres avec Role',
         'pair:membershipActor': 'Membre',
-        'pair:membershipRole': 'Role'
       }
     }
   }

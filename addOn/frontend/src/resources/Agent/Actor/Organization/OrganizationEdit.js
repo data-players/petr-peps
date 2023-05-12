@@ -21,7 +21,7 @@ export const OrganizationEdit = props => (
         <TextInput source="pair:label" fullWidth />
         <TextInput label="Type de professionnels / services" source="peps:type" fullWidth  />
         <MarkdownInput multiline source="pair:description" fullWidth />
-        <TextInput label="Horaire d'ouverture" source="peps:openHour" fullWidth />
+        <TextInput label="Horaires d'ouverture" source="peps:openHour" fullWidth />
         {/* <ReferenceInput reference="Status" source="pair:hasStatus" filter={{ a: 'pair:AgentStatus' }}>
           <SelectInput optionText="pair:label" fullWidth/>
         </ReferenceInput> */}
