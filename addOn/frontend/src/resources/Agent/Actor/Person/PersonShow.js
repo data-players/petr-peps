@@ -37,8 +37,8 @@ const PersonShow = props => {
           <Hero image="image">
             <TextField source="pair:firstName" />
             <TextField source="pair:lastName" />
+            <TextField label="Email" source="foaf:email" />
             <TextField source="pair:comment" />
-            <Test label="Email" source="foaf:email" />
           </Hero>
           <MainList>
             <MapField

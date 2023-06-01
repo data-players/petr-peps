@@ -126,6 +126,12 @@
             rdfs:range xsd:string .
 
 
+###  https://data.petr-peps.data-players.com/ontology#showEmail
+:showEmail rdf:type owl:DatatypeProperty ;
+           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Person> ;
+           rdfs:range xsd:boolean .
+
+
 ###  https://data.petr-peps.data-players.com/ontology#skills
 :skills rdf:type owl:DatatypeProperty ;
         rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;

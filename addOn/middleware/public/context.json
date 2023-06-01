@@ -39,6 +39,9 @@
       "peps:hasLifeStage": {
         "@type": "@id"
       },
+      "peps:showEmail": {
+        "@type": "@id"
+      },
       "pair:image": {
         "@type": "@id"
       },
