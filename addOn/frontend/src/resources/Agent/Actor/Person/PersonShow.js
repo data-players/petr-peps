@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from 'react-admin';
+import { TextField,useRecordContext } from 'react-admin';
 import { Grid } from '@material-ui/core';
 import { QuickAppendReferenceArrayField } from '@semapps/field-components';
 import { ChipList } from '@semapps/list-components';
@@ -19,14 +19,29 @@ const ConditionalSourceDefinedHandler = ({ record, source, children, ...otherPro
   }
 };
 
-const Test = ({ record, source, label }) => {
-  if (record["peps:showEmail"])
+const EmailBooleanView = () => {
+  const record = useRecordContext();
+  if (!record) return null;
+
+  if(record["peps:showEmail"] === true) {
     return (
-      <div style={{display: "flex", padding: "12px", marginLeft:"16%"}}>
-        <div style={{color: "rgba(0, 0, 0, 0.54)"}}>Email</div>
-        <TextField style={{marginLeft: "28px"}} label={label} source={source} />
-      </div>
+      <Hero image="image">
+        <TextField source="pair:firstName" />
+        <TextField source="pair:lastName" />
+        <TextField label="Email" source="pair:e-mail" />
+        <TextField source="pair:comment" />
+      </Hero>
     )
+  } else {
+    return (
+      <Hero image="image">
+        <TextField source="pair:firstName" />
+        <TextField source="pair:lastName" />
+        <TextField source="pair:comment" />
+      </Hero>
+    )
+  }
+
 }
 
 const PersonShow = props => {
@@ -34,12 +49,7 @@ const PersonShow = props => {
     <Show title={<PersonTitle />} {...props}>
       <Grid container spacing={5}>
         <Grid item xs={12} sm={9}>
-          <Hero image="image">
-            <TextField source="pair:firstName" />
-            <TextField source="pair:lastName" />
-            <TextField label="Email" source="foaf:email" />
-            <TextField source="pair:comment" />
-          </Hero>
+          <EmailBooleanView />
           <MainList>
             <MapField
               source="pair:hasLocation"
