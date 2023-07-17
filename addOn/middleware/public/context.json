@@ -27,6 +27,12 @@
       "peps:hasNeed": {
         "@type": "@id"
       },
+      "peps:hasDatasource": {
+        "@type": "@id"
+      },
+      "peps:datasourceOf": {
+        "@type": "@id"
+      },
       "peps:hasProfile": {
         "@type": "@id"
       },

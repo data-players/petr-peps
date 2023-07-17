@@ -11,6 +11,7 @@ export { default as Mobility } from './Concept/Mobility';
 export { default as Lifestage } from './Concept/Lifestage';
 export { default as Need } from './Concept/Need';
 export { default as Accessibility } from './Concept/Accessibility';
+export { default as Datasource } from './Concept/Datasource';
 
 // export { default as Type } from './Concept/Type';
 export { default as Concept } from './Concept/Concept';

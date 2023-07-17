@@ -21,6 +21,7 @@ module.exports = {
   events: {
     async 'auth.registered'(ctx) {
       const { webId, profileData } = ctx.params;
+
       await ctx.call(
         'ldp.resource.patch',
         {
