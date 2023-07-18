@@ -27,7 +27,7 @@
       "peps:hasNeed": {
         "@type": "@id"
       },
-      "peps:hasDatasource": {
+      "peps:hasDataSource": {
         "@type": "@id"
       },
       "peps:datasourceOf": {

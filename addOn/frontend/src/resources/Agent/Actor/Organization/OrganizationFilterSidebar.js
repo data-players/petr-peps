@@ -106,7 +106,7 @@ const ProjectFilterSidebar = () => {
         />
         <ReferenceFilter
           reference="Datasource"
-          source="peps:hasDatasource"
+          source="peps:hasDataSource"
           limit={100}
           showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}

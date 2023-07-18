@@ -50,7 +50,7 @@ export const OrganizationEdit = props => (
         <ReferenceArrayInput label="Accessibilité" source="peps:hasAccessibility" reference="Accessibility" fullWidth >
           <CheckboxGroupInput optionText="pair:label" />
         </ReferenceArrayInput>
-        <ReferenceInput source="peps:hasDatasource" reference="Datasource" fullWidth >
+        <ReferenceInput source="peps:hasDataSource" reference="Datasource" fullWidth >
           <AutocompleteInput optionText="pair:label" />
         </ReferenceInput>
       </FormTab>
