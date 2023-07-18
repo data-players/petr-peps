@@ -104,6 +104,13 @@ const ProjectFilterSidebar = () => {
           showCounters={false}
           sort={{ field: 'pair:label', order: 'DESC' }}
         />
+        <ReferenceFilter
+          reference="Datasource"
+          source="peps:hasDatasource"
+          limit={100}
+          showCounters={false}
+          sort={{ field: 'pair:label', order: 'DESC' }}
+        />
       </CardContent>
     </Card>
   );

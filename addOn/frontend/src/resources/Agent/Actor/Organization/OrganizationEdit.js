@@ -6,9 +6,10 @@ import {
   FormTab,
   CheckboxGroupInput,
   AutocompleteArrayInput,
+  AutocompleteInput
 } from 'react-admin';
 import { ImageField } from '@semapps/field-components';
-import { ReferenceArrayInput } from '@semapps/input-components';
+import { ReferenceArrayInput, ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
 import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
@@ -49,9 +50,9 @@ export const OrganizationEdit = props => (
         <ReferenceArrayInput label="Accessibilité" source="peps:hasAccessibility" reference="Accessibility" fullWidth >
           <CheckboxGroupInput optionText="pair:label" />
         </ReferenceArrayInput>
-        <ReferenceArrayInput source="peps:hasDatasource" reference="Datasource" fullWidth >
-          <AutocompleteArrayInput optionText="pair:label" />
-        </ReferenceArrayInput>
+        <ReferenceInput source="peps:hasDatasource" reference="Datasource" fullWidth >
+          <AutocompleteInput optionText="pair:label" />
+        </ReferenceInput>
       </FormTab>
     </TabbedForm>
   </Edit>
