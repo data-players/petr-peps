@@ -22,8 +22,8 @@ export const OrganizationEdit = props => (
         <TextInput source="pair:label" fullWidth />
         <TextInput label="Type de professionnels / services" source="peps:type" fullWidth  />
         <MarkdownInput multiline source="pair:description" fullWidth />
+        <TextInput label="ouverture" source='peps:openHour' fullWidth />
         <TextInput label="Capacité d'accueil" source="peps:accommodationCapacity" fullWidth />
-        <TextInput label="OUVERTURE" source='peps:openHour' fullWidth />
         <TextInput label="Public concerné et critère(s) d'admission" source="peps:concernedPublic" fullWidth />
         <TextInput label="Compétences" source="peps:skills" fullWidth />
         <LocationInput source="pair:hasLocation" fullWidth  />
