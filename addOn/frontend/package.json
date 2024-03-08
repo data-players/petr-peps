@@ -5,7 +5,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fullcalendar/core": "^5.7.2",
-    "@mui/icons-material": "^5.11.0",
+    "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.111",
     "@mui/material": "^5.10.17",
     "@semapps/auth-provider": "0.4.4",
