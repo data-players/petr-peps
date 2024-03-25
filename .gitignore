@@ -1,5 +1,6 @@
 /data
 /keycloak
 /middleware
+addOn/frontend/node_modules
 .vscode
 index.html
