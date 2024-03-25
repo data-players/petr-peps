@@ -3,7 +3,7 @@ export { default as Organization } from './Agent/Actor/Organization';
 export { default as Person } from './Agent/Actor/Person';
 export { default as Actor } from './Agent/Actor/Actor';
 
-// Concepts
+// // Concepts
 // export { default as Theme } from './Concept/Theme';
 export { default as Sector } from './Concept/Sector';
 export { default as Profile } from './Concept/Profile';
@@ -20,5 +20,5 @@ export { default as Concept } from './Concept/Concept';
 // Pages
 export { default as Page } from './Page';
 
-// Put this at the end, otherwise it will load as the homepage
+// // Put this at the end, otherwise it will load as the homepage
 export { default as Agent } from './Agent/Agent';

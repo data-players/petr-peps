@@ -2,7 +2,7 @@ import DatasourceCreate from "./DatasourceCreate";
 import DatasourceEdit from './DatasourceEdit';
 import DatasourceList from './DatasourceList';
 import DatasourceShow from './DatasourceShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

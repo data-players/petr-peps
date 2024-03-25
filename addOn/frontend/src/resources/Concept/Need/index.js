@@ -2,7 +2,7 @@ import NeedCreate from "./NeedCreate";
 import NeedEdit from './NeedEdit';
 import NeedList from './NeedList';
 import NeedShow from './NeedShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

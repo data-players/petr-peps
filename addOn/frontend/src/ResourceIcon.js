@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'react-redux';
-import DefaultIcon from '@material-ui/icons/Home';
+import DefaultIcon from '@mui/icons-material/Home';
 
 const ResourceIcon = ({resource}) => {
   const store = useStore();

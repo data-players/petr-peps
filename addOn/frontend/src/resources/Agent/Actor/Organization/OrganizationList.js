@@ -1,10 +1,10 @@
 import React from 'react';
 import { MultiViewsList } from '@semapps/list-components';
 import { MapList } from '@semapps/geo-components';
-import { Avatar } from '@material-ui/core';
-import MapIcon from '@material-ui/icons/Map';
-import ListIcon from '@material-ui/icons/List';
-import HomeIcon from '@material-ui/icons/Home';
+import { Avatar } from '@mui/material';
+import MapIcon from '@mui/icons-material/Map';
+import ListIcon from '@mui/icons-material/List';
+import HomeIcon from '@mui/icons-material/Home';
 import OrganizationFilterSidebar from './OrganizationFilterSidebar';
 import SimpleList from "../../../../common/list/SimpleList";
 import List from "../../../../layout/list/List";
@@ -36,11 +36,12 @@ const OrganizationList = props => (
             longitude={record => record['pair:hasLocation'] && record['pair:hasLocation']['pair:longitude']}
             label={record => record['pair:label']}
             description={record => record['peps:type']}
-            popupContent={PopupContent}
+            // popupContent={PopupContent}
             scrollWheelZoom
             center= {[46.42816, 4.66527]}
             zoom= {11}
           />
+
           // <MapContainer style={{ height: "100vh" }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
           //   <TileLayer
           //     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

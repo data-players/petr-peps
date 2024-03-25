@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChipField, SingleFieldList } from 'react-admin';
-import { Grid } from '@material-ui/core';
+import { ChipField, SingleFieldList, TextField } from 'react-admin';
+import { Grid } from '@mui/material';
 import { ReferenceArrayField } from '@semapps/field-components';
 import NeedTitle from './NeedTitle';
 import { MarkdownField } from '../../../common/field';
@@ -12,6 +12,7 @@ const NeedShow = props => (
     <Grid container spacing={5}>
       <Grid item xs={12} sm={9}>
         <MainList>
+          <TextField source="pair:label"/>
           <MarkdownField source="pair:description" />
         </MainList>
       </Grid>

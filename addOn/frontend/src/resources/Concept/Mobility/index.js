@@ -2,7 +2,7 @@ import MobilityCreate from "./MobilityCreate";
 import MobilityEdit from './MobilityEdit';
 import MobilityList from './MobilityList';
 import MobilityShow from './MobilityShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

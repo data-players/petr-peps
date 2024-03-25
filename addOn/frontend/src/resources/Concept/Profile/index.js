@@ -2,7 +2,7 @@ import ProfileCreate from "./ProfileCreate";
 import ProfileEdit from './ProfileEdit';
 import ProfileList from './ProfileList';
 import ProfileShow from './ProfileShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

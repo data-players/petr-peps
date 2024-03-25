@@ -1,0 +1,85 @@
+version: '3.5'
+services:
+  fuseki:
+    image: semapps/jena-fuseki-webacl
+    volumes:
+      - './data/fuseki:/fuseki'
+      - './data/staging:/staging'
+    ports:
+      - '3030:3030'
+    networks:
+      - semapps
+    environment:
+      ADMIN_PASSWORD: admin
+
+  fuseki_compact:
+    image: semapps/jena-fuseki-webacl:latest
+    entrypoint: /docker-compact-entrypoint.sh
+    profiles: 
+      - compact
+    volumes:
+      - ./data/fuseki:/fuseki
+
+  middleware:
+    image: dataplayers/archipelago-middleware:0.10
+    depends_on:
+      - fuseki
+    volumes:
+      - './middleware/logs:/archipelago/middleware/logs'
+      - './middleware/jwt:/archipelago/middleware/jwt'
+      - './middleware/uploads:/archipelago/middleware/uploads'
+      - './addOn:/archipelago/middleware/addOn'
+      - './data/fuseki/databases/localData:/localData'
+      - './data/fuseki/backups:/app/fuseki-backups' # Needed to backup fuseki datasets
+    environment:
+      - 'SEMAPPS_SPARQL_ENDPOINT=http://fuseki:3030/'
+      - SEMAPPS_MAIN_DATASET=localData
+      - SEMAPPS_JENA_USER=admin
+      - SEMAPPS_JENA_PASSWORD=admin
+      - 'SEMAPPS_HOME_URL=http://localhost:3000/'
+      - 'SEMAPPS_OIDC_ISSUER=https://login.lescommuns.org/auth/realms/master/'
+      - SEMAPPS_OIDC_CLIENT_ID=semapps
+      - 'SEMAPPS_REDIS_URL=redis://redis:6379/0'
+      - SEMAPPS_BACKUP_SERVER_USER=backup
+      - SEMAPPS_BACKUP_SERVER_PASSWORD=b4ckup8462
+      - SEMAPPS_BACKUP_SERVER_HOST=ftp-ftpgo.data-players.com
+      - SEMAPPS_BACKUP_SERVER_PORT=2022
+      - SEMAPPS_BACKUP_SERVER_PATH=/backups/petr/peps/backups/datasets
+      - SEMAPPS_BACKUP_FUSEKI_DATASETS_PATH=/app/fuseki-backups/
+    command: bash -c "cp -r ./addOn/middleware/* . && pm2-runtime 'yarn run dev'"
+    networks:
+      - semapps
+    ports:
+      - '3000:3000'
+
+  frontend:
+    image: dataplayers/archipelago-frontend:0.8
+    environment:
+      # - 'REACT_APP_MIDDLEWARE_URL=http://localhost:3000/'
+      - 'REACT_APP_MIDDLEWARE_URL=https://data.petr-peps.data-players.com/'
+      - REACT_APP_MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijoic3Jvc3NldDgxIiwiYSI6ImNrbDd0b2VkMzA1dDMycG9iemU4NnpuemsifQ.HvpZ3tnweVHEUYLb0tDvTg
+      - PORT=4000
+    volumes:
+      - ./addOn:/archipelago/frontend/addOn
+    command: bash -c "cp -r ./addOn/frontend/* . && yarn install && yarn copy-and-start-addOn"
+    networks:
+      - semapps
+    ports:
+      - '4000:4000'
+
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - './data/redis_data:/data'
+    networks:
+      - semapps
+    command:
+      - redis-server
+      - '--appendonly'
+      - 'yes'
+
+networks:
+  semapps:
+    name: semapps_network

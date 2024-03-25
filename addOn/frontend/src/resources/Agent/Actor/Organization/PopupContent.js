@@ -1,23 +1,22 @@
 import React from 'react';
-import { ShowButton, EditButton, useResourceDefinition } from 'react-admin';
-import { Typography } from '@material-ui/core';
+import { ShowButton, EditButton, useResourceDefinition, useRecordContext } from 'react-admin';
+import { Typography } from '@mui/material';
 
-
-
-const PopupContent = ({ record, basePath }) => {
+const PopupContent = () => {
+  const record = useRecordContext();
   const resourceDefinition = useResourceDefinition({});
   const isIframe = window !== window.top;
-
+  if (!record) return null;
   return (
     <>
       {record.label && <Typography variant="h5">{record.label}</Typography>}
       {record.description && (
         <Typography>
-          {record.description.length > 150 ? record.description.substring(0, 150) + '...' : record.description}
+          {record.description.length > 150 ? `${record.description.substring(0, 150)}...` : record.description}
         </Typography>
       )}
-      {resourceDefinition.hasShow && <ShowButton basePath={basePath} record={record} />}
-      {!isIframe && resourceDefinition.hasEdit && <EditButton basePath={basePath} record={record} />}
+      {resourceDefinition.hasShow && <ShowButton />}
+      {!isIframe && resourceDefinition.hasEdit && <EditButton />}
     </>
   );
 };

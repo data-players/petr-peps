@@ -2,7 +2,7 @@ import LifestageCreate from "./LifestageCreate";
 import LifestageEdit from './LifestageEdit';
 import LifestageList from './LifestageList';
 import LifestageShow from './LifestageShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

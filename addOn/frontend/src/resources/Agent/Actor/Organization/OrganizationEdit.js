@@ -6,22 +6,24 @@ import {
   FormTab,
   CheckboxGroupInput,
   AutocompleteArrayInput,
-  AutocompleteInput
+  AutocompleteInput,
+  ImageField
 } from 'react-admin';
-import { ImageField } from '@semapps/field-components';
 import { ReferenceArrayInput, ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-import OrganizationTitle from './OrganizationTitle';
+// import OrganizationTitle from './OrganizationTitle';
 import Edit from "../../../../layout/edit/Edit";
 import { LocationInput } from '../../../../common/input';
 
 export const OrganizationEdit = props => (
-  <Edit title={<OrganizationTitle />} {...props}>
+  <Edit
+    // title={<OrganizationTitle />}
+    {...props}>
     <TabbedForm redirect="show">
       <FormTab label="Données">
         <TextInput source="pair:label" fullWidth />
         <TextInput label="Type de professionnels / services" source="peps:type" fullWidth  />
-        <MarkdownInput multiline source="pair:description" fullWidth />
+        <MarkdownInput source="pair:description" fullWidth />
         <TextInput label="ouverture" source='peps:openHour' fullWidth />
         <TextInput label="Capacité d'accueil" source="peps:accommodationCapacity" fullWidth />
         <TextInput label="Public concerné et critère(s) d'admission" source="peps:concernedPublic" fullWidth />

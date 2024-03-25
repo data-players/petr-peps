@@ -2,7 +2,7 @@ import AccessibilityCreate from "./AccessibilityCreate";
 import AccessibilityEdit from './AccessibilityEdit';
 import AccessibilityList from './AccessibilityList';
 import AccessibilityShow from './AccessibilityShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

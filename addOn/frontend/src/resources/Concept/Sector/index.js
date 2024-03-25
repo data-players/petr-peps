@@ -2,7 +2,7 @@ import SectorCreate from "./SectorCreate";
 import SectorEdit from './SectorEdit';
 import SectorList from './SectorList';
 import SectorShow from './SectorShow';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export default {
   config: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CreateButton, ExportButton, useResourceDefinition, TopToolbar } from 'react-admin';
-import { useMediaQuery } from '@material-ui/core';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { ViewsButtons } from '@semapps/list-components';
 
 const isIframe = window !== window.top;

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { Layout as RaLayout, useAuthenticated } from 'react-admin';
-import { makeStyles } from '@material-ui/core';
+import { Layout as RaLayout } from 'react-admin';
+import { makeStyles } from '@mui/styles';
 import AppBar from './AppBar';
 import TreeMenu from './TreeMenu/TreeMenu';
 

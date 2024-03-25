@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { 
   useDataProvider,
 } from 'react-admin';
-import { Avatar, Box, Button, Chip, Container, makeStyles, ListItem } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import OrganizationIcon from '@material-ui/icons/Home';
+import { Avatar, Box, Button, Chip, Container, ListItem } from '@mui/material';
+import {  makeStyles } from '@mui/styles';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import OrganizationIcon from '@mui/icons-material/Home';
 import ontologies from '../../config/ontologies.json';
 import customSearchConfig from './config';
 import ResourceIcon from '../../ResourceIcon';

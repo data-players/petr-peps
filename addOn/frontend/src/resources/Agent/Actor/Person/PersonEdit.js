@@ -1,13 +1,12 @@
 import React from 'react';
-import { ImageInput, TabbedForm, TextInput, FormTab, BooleanInput } from 'react-admin';
-import { ImageField } from '@semapps/field-components';
+import { ImageInput, TabbedForm, TextInput, FormTab, BooleanInput,ImageField } from 'react-admin';
 import { ActivitiesInput, LocationInput, SkillsInput, ThemesInput } from '../../../../common/input';
-import PersonTitle from './PersonTitle';
+// import PersonTitle from './PersonTitle';
 import Edit from "../../../../layout/edit/Edit";
 
 export const PersonEdit = props => (
   <Edit
-    title={<PersonTitle />}
+    // title={<PersonTitle />}
     transform={data => ({ ...data, 'pair:label': `${data['pair:firstName']} ${data['pair:lastName']?.toUpperCase()}` })}
     {...props}
   >
