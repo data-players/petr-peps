@@ -42,6 +42,28 @@ module.exports = {
                }
              })
            ]
+       },
+       {
+         path: '/__diag',
+         use: [
+           (req, res) => {
+             res.setHeader('Access-Control-Allow-Origin', '*');
+             res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+             res.setHeader('Access-Control-Allow-Headers', '*');
+             if (req.method === 'OPTIONS') {
+               res.statusCode = 204;
+               res.end();
+               return;
+             }
+             let body = '';
+             req.on('data', chunk => (body += chunk));
+             req.on('end', () => {
+               console.log('[DIAG]', body);
+               res.statusCode = 204;
+               res.end();
+             });
+           }
+         ]
        }
       ]
     },

