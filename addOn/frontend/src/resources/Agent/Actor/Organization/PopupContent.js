@@ -1,12 +1,18 @@
 import React from 'react';
-import { ShowButton, EditButton, useResourceDefinition, useRecordContext } from 'react-admin';
+import { ShowButton, EditButton, useResourceDefinition, useRecordContext, usePermissions } from 'react-admin';
 import { Typography } from '@mui/material';
+
+const EDIT_MODES = ['acl:Append', 'acl:Write', 'acl:Control'];
 
 const PopupContent = () => {
   const record = useRecordContext();
   const resourceDefinition = useResourceDefinition({});
   const isIframe = window !== window.top;
+  const recordId = record ? record.id || record['@id'] : undefined;
+  const { permissions } = usePermissions(recordId || {});
   if (!record) return null;
+  const canEdit =
+    permissions && permissions.some(permission => EDIT_MODES.includes(permission['acl:mode']));
   return (
     <>
       {record.label && <Typography variant="h5">{record.label}</Typography>}
@@ -16,7 +22,7 @@ const PopupContent = () => {
         </Typography>
       )}
       {resourceDefinition.hasShow && <ShowButton />}
-      {!isIframe && resourceDefinition.hasEdit && <EditButton />}
+      {!isIframe && resourceDefinition.hasEdit && canEdit && <EditButton />}
     </>
   );
 };

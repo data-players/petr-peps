@@ -36,7 +36,7 @@ const OrganizationList = props => (
             longitude={record => record['pair:hasLocation'] && record['pair:hasLocation']['pair:longitude']}
             label={record => record['pair:label']}
             description={record => record['peps:type']}
-            // popupContent={PopupContent}
+            popupContent={PopupContent}
             scrollWheelZoom
             center= {[46.42816, 4.66527]}
             zoom= {11}
