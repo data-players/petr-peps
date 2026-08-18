@@ -65,6 +65,12 @@ Go to https://login.mydomain.com/auth and click on administration console. Conne
 On the left panel, click on Clients, then semapps as client ID.
 If you scroll down, you must see a line "Valid Redirect URIs. Add your middleware address + "/*" (exemple : https://data.mydomain.com/*)
 
+## Documentation
+
+- [Architecture du projet](documentation/architecture.md) — stack SEMAPPS/Archipelago, fonctionnement WebACL, structure du dépôt, pièges.
+- [Bugs connus](documentation/bugs/) — bugs documentés (ex. édition d'organisation en 403).
+- [Guide pour les agents de développement](AGENTS.md) — contexte pour prendre en main le dépôt.
+
 ## Customisation
 
 #### Custom frontend
