@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useLogin } from 'react-admin';
+import { useLogin, useNotify } from 'react-admin';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,22 +16,37 @@ const useStyles = makeStyles(theme => ({
     minWidth: 300,
     maxWidth: 350,
     marginTop: '6em'
-  },
-  avatar: {
-    margin: '1em',
-    display: 'flex',
-    justifyContent: 'center'
   }
 }));
 
-// Écran de connexion SSO.
-// Au clic, on appelle authProvider.login({ redirect: '/Organization' }) : en mode SSO,
-// le authProvider construit l'URL /auth?redirectUrl=<origin>/login?login=true&redirect=/Organization
-// (avec le bon origin cross-origin du serveur d'auth). Au retour du SSO, SsoLoginPage lit le
-// paramètre `redirect` et redirige l'utilisateur directement vers /Organization.
+// Reprend la logique de connexion SSO de @semapps/auth-provider (SsoLoginPage) :
+// - bouton "Les Communs" qui appelle authProvider.login({ redirect: '/Organization' }).
+//   En mode SSO, le authProvider construit l'URL /auth?redirectUrl=<origin>/login?login=true&redirect=/Organization
+//   (avec le bon origin cross-origin du serveur d'auth), puis redirige vers le SSO.
+// - au retour du SSO, sur /login?login=true&token=...&redirect=/Organization, ce composant
+//   stocke le token et redirige directement vers /Organization (évite le passage par la racine /
+//   qui annulait le fetch du profil et déclenchait un localStorage.clear()).
 const LoginPage = ({ theme }) => {
   const classes = useStyles(theme);
   const login = useLogin();
+  const notify = useNotify();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has('login')) {
+      if (params.has('token')) {
+        localStorage.setItem('token', params.get('token'));
+        const redirect = params.get('redirect') || '/';
+        notify('auth.message.user_connected', { type: 'info' });
+        window.location.href = redirect;
+      }
+    } else if (params.has('logout')) {
+      localStorage.clear();
+      notify('auth.message.user_disconnected', { type: 'info' });
+      window.location.href = '/';
+    }
+  }, [notify]);
 
   return (
     <div className={classes.root}>
