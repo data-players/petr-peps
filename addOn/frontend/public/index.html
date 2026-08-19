@@ -16,69 +16,6 @@
     <link rel="stylesheet" href="https://unpkg.com/react-mde@11.5.0/lib/styles/css/react-mde-all.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.2/main.min.css" />
     <title>Petr Peps</title>
-    <script>
-      (function () {
-        var events = [];
-        window.__tokenEvents = events;
-        var DIAG_URL = 'https://data.petr-peps.data-players.com/__diag';
-        function send(evt) {
-          try {
-            fetch(DIAG_URL, { method: 'POST', body: JSON.stringify(evt), keepalive: true }).catch(function () {});
-          } catch (e) {}
-        }
-        function log(type, key, extra, stack) {
-          var evt = { t: type, key: key, url: location.href, ua: navigator.userAgent, ts: Date.now() };
-          if (extra) evt.extra = extra;
-          var msg = '[TOKEN-DIAG] ' + type + ' key=' + key + ' url=' + location.href + (extra || '');
-          console.log(msg);
-          if (stack) {
-            console.log(stack);
-            evt.stack = String(stack);
-          }
-          events.push(evt);
-          send(evt);
-        }
-        try {
-          log('INIT', 'token-present=' + (localStorage.getItem('token') !== null));
-        } catch (e) {}
-        var origSet = Storage.prototype.setItem;
-        var origRemove = Storage.prototype.removeItem;
-        var origClear = Storage.prototype.clear;
-        Storage.prototype.setItem = function (key, value) {
-          log('SET', key, ' len=' + String(value).length, new Error().stack);
-          return origSet.call(this, key, value);
-        };
-        Storage.prototype.removeItem = function (key) {
-          log('REMOVE', key, '', new Error().stack);
-          return origRemove.call(this, key);
-        };
-        Storage.prototype.clear = function () {
-          var hadToken = localStorage.getItem('token');
-          log('CLEAR', '*', '', new Error().stack);
-          var r = origClear.call(this);
-          if (hadToken !== null) {
-            origSet.call(this, 'token', hadToken);
-            log('RESTORE', 'token');
-          }
-          return r;
-        };
-        window.addEventListener('storage', function (e) {
-          log('STORAGE_EVENT', e.key, ' new=' + String(e.newValue).substring(0, 20) + ' old=' + String(e.oldValue).substring(0, 20));
-        });
-        var origConsoleError = console.error;
-        console.error = function () {
-          try {
-            var args = Array.prototype.slice.call(arguments);
-            var msg = args.map(function (a) {
-              try { return typeof a === 'string' ? a : JSON.stringify(a); }
-              catch (e) { return String(a); }
-            }).join(' | ');
-            send({ t: 'CONSOLE_ERROR', msg: msg.substring(0, 1000), url: location.href, stack: String(new Error().stack), ts: Date.now() });
-          } catch (e2) {}
-          return origConsoleError.apply(console, arguments);
-        };
-      })();
-    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
