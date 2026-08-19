@@ -53,8 +53,14 @@
           return origRemove.call(this, key);
         };
         Storage.prototype.clear = function () {
+          var hadToken = localStorage.getItem('token');
           log('CLEAR', '*', '', new Error().stack);
-          return origClear.call(this);
+          var r = origClear.call(this);
+          if (hadToken !== null) {
+            origSet.call(this, 'token', hadToken);
+            log('RESTORE', 'token');
+          }
+          return r;
         };
         window.addEventListener('storage', function (e) {
           log('STORAGE_EVENT', e.key, ' new=' + String(e.newValue).substring(0, 20) + ' old=' + String(e.oldValue).substring(0, 20));
