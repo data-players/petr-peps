@@ -1,10 +1,6 @@
 const CONFIG = require('./config/config');
 const { WebAclMiddleware, CacherMiddleware } = require('@semapps/webacl');
 
-
-console.log('Locale CACHE',CONFIG.REDIS_CACHE_HOST);
-console.log('Password CACHE',CONFIG.REDIS_CACHE_PASSW);
-
 // Use the cacher only if Redis is configured
 const cacherConfig = CONFIG.REDIS_CACHE_HOST
   ? {

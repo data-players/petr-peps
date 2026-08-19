@@ -4,3 +4,4 @@
 addOn/frontend/node_modules
 .vscode
 index.html
+.playwright-mcp/

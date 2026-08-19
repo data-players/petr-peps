@@ -10,8 +10,6 @@ const ColorInput = (props) => {
     field: { onChange, value },
   } = useController({ name: source, control });
 
-  console.log(value)
-
   return (
     <Labeled source={source} {...props}>
       <SketchPicker color={value} onChange={(color) => onChange(color.hex)} />

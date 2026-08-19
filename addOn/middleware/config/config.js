@@ -1,6 +1,5 @@
 // Read all .env* files in the root folder and add them to process.env
 // See https://github.com/kerimdzhanov/dotenv-flow for more details
-console.log('process.env',process.env);
 require('dotenv-flow').config();
 
 module.exports = {

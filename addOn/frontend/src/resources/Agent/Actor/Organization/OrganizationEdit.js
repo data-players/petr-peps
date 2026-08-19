@@ -14,8 +14,6 @@ import {
 } from 'react-admin';
 import { ReferenceArrayInput, ReferenceInput } from '@semapps/input-components';
 import { MarkdownInput } from '@semapps/markdown-components';
-// import OrganizationTitle from './OrganizationTitle';
-// import Edit from "../../../../layout/edit/Edit";
 import ToolBarCustom from "../../../../common/ToolBarCustom";
 import { LocationInput } from '../../../../common/input';
 
@@ -25,8 +23,6 @@ export const OrganizationEdit = props => {
   } = useEditController(props);
   const lock = record?.['aurba:externalSource']!=undefined;
   const deleteable = !lock || record?.['aurba:externalDeleted']==true;
-  console.log('record2',deleteable,record);
-  console.log('ToolBarCustom',ToolBarCustom)
   return(
   <Edit mutationMode="pessimistic"
     // title={<OrganizationTitle />}

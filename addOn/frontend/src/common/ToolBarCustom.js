@@ -1,7 +1,6 @@
 import React from 'react';
-import {Toolbar, SaveButton, DeleteButton} from 'react-admin';
+import {Toolbar, SaveButton} from 'react-admin';
 import { makeStyles } from '@mui/styles';
-// import DeleteButtonWithPermissions from './DeleteButtonWithPermissions';
 import { DeleteButtonWithPermissions } from "@semapps/auth-provider";
 
 const useStyles = makeStyles({
@@ -14,7 +13,6 @@ const useStyles = makeStyles({
 
 
 const ToolBarCustom = ({deleteable,...props}) => {
-    console.log('ALLLLO',deleteable)
     return(
     <Toolbar {...props} classes={useStyles()} >
         <SaveButton />
