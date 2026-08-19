@@ -65,6 +65,18 @@
         window.addEventListener('storage', function (e) {
           log('STORAGE_EVENT', e.key, ' new=' + String(e.newValue).substring(0, 20) + ' old=' + String(e.oldValue).substring(0, 20));
         });
+        var origConsoleError = console.error;
+        console.error = function () {
+          try {
+            var args = Array.prototype.slice.call(arguments);
+            var msg = args.map(function (a) {
+              try { return typeof a === 'string' ? a : JSON.stringify(a); }
+              catch (e) { return String(a); }
+            }).join(' | ');
+            send({ t: 'CONSOLE_ERROR', msg: msg.substring(0, 1000), url: location.href, stack: String(new Error().stack), ts: Date.now() });
+          } catch (e2) {}
+          return origConsoleError.apply(console, arguments);
+        };
       })();
     </script>
   </head>
